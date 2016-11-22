@@ -13,6 +13,7 @@ protected:
     virtual int getCardsPerCoin(int coins) = 0;
     virtual string getName() = 0;
     virtual void print(std::ostream &out) = 0;
+    friend std::ostream operator<<(std::ostream &, Card &);
 };
 
 class Quartz : public Card {

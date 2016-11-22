@@ -22,7 +22,7 @@ string Quartz::getName() {
 }
 
 void Quartz::print(std::ostream &out) {
-
+    out << "Q";
 }
 
 int Hematite::getCardsPerCoin(int coins) {
@@ -42,7 +42,7 @@ string Hematite::getName() {
 }
 
 void Hematite::print(std::ostream &out) {
-
+    out << "H";
 }
 
 int Obsidian::getCardsPerCoin(int coins) {
@@ -62,7 +62,7 @@ string Obsidian::getName() {
 }
 
 void Obsidian::print(std::ostream &out) {
-
+    out << "O";
 }
 
 int Malachite::getCardsPerCoin(int coins) {
@@ -82,7 +82,7 @@ string Malachite::getName() {
 }
 
 void Malachite::print(std::ostream &out) {
-
+    out << "M";
 }
 
 int Turquoise::getCardsPerCoin(int coins) {
@@ -102,7 +102,7 @@ string Turquoise::getName() {
 }
 
 void Turquoise::print(std::ostream &out) {
-
+    out << "T";
 }
 
 int Ruby::getCardsPerCoin(int coins) {
@@ -122,7 +122,7 @@ string Ruby::getName() {
 }
 
 void Ruby::print(std::ostream &out) {
-
+    out << "R";
 }
 
 int Amethyst::getCardsPerCoin(int coins) {
@@ -142,7 +142,7 @@ string Amethyst::getName() {
 }
 
 void Amethyst::print(std::ostream &out) {
-
+    out << "A";
 }
 
 int Emerald::getCardsPerCoin(int coins) {
@@ -158,5 +158,10 @@ string Emerald::getName() {
 }
 
 void Emerald::print(std::ostream &out) {
+    out << "E";
+}
 
+std::ostream operator<<(std::ostream &output, Card &card) {
+    card.print(output);
+    return output;
 }
