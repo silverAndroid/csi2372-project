@@ -15,6 +15,9 @@ Deck::Deck() {
 
 }
 
-std::ostream &Deck::operator<<(Deck deck) {
-    return <#initializer#>;
+friend std::ostream &Deck::operator<<(std::ostream &output, Deck &deck) {
+    for (int i = 0; i < deck.size(); ++i) {
+        output << deck[i];
+    }
+    return output;
 }

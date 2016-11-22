@@ -13,7 +13,7 @@ class Deck : std::vector<Card> {
 public:
     Deck();
     Card* draw();
-    std::ostream &operator<<(Deck deck);
+    friend std::ostream &operator<<(std::ostream &output, Deck &deck);
 };
 
 
