@@ -1,5 +1,5 @@
 //
-// Created by silver_android on 21/11/16.
+// Created by silver_android on 23/11/16.
 //
 
 #ifndef CSI2372_PROJECT_CHAIN_H
@@ -8,13 +8,14 @@
 #include <vector>
 #include "card.h"
 
-template <typename T> class Chain {
+template <typename T>
+class Chain {
 private:
-    std::vector<T*> chain;
+    std::vector<T*> chainList;
 public:
-    Chain(std::istream&, CardFactory*);
-    Chain<T>&operator+=(Card*);
+    Chain<T>&operator+=(Card *);
     int sell();
+    friend std::ostream& operator<<(std::ostream &, const Chain<T> &);
 };
 
 

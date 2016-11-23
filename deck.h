@@ -1,5 +1,5 @@
 //
-// Created by silver_android on 21/11/16.
+// Created by silver_android on 23/11/16.
 //
 
 #ifndef CSI2372_PROJECT_DECK_H
@@ -8,12 +8,15 @@
 
 #include <vector>
 #include "card.h"
+#include "cardFactory.h"
+
+class CardFactory;
 
 class Deck : std::vector<Card> {
 public:
-    Deck();
-    Card* draw();
-    friend std::ostream &operator<<(std::ostream &output, Deck &deck);
+    Deck(std::istream &, CardFactory *);
+    Card *draw();
+    friend std::ostream& operator<<(std::ostream &, const Deck &);
 };
 
 
