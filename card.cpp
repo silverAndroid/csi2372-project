@@ -21,8 +21,8 @@ string Quartz::getName() {
     return "Quartz";
 }
 
-void Quartz::print(std::ostream &out) {
-    out << "Q";
+void Quartz::print(std::ostream &out) const {
+    out << string("Q");
 }
 
 int Hematite::getCardsPerCoin(int coins) {
@@ -41,8 +41,8 @@ string Hematite::getName() {
     return "Hematite";
 }
 
-void Hematite::print(std::ostream &out) {
-    out << "H";
+void Hematite::print(std::ostream &out) const {
+    out << string("H");
 }
 
 int Obsidian::getCardsPerCoin(int coins) {
@@ -61,8 +61,8 @@ string Obsidian::getName() {
     return "Obsidian";
 }
 
-void Obsidian::print(std::ostream &out) {
-    out << "O";
+void Obsidian::print(std::ostream &out) const {
+    out << string("O");
 }
 
 int Malachite::getCardsPerCoin(int coins) {
@@ -81,8 +81,8 @@ string Malachite::getName() {
     return "Malachite";
 }
 
-void Malachite::print(std::ostream &out) {
-    out << "M";
+void Malachite::print(std::ostream &out) const {
+    out << string("M");
 }
 
 int Turquoise::getCardsPerCoin(int coins) {
@@ -101,8 +101,8 @@ string Turquoise::getName() {
     return "Turquoise";
 }
 
-void Turquoise::print(std::ostream &out) {
-    out << "T";
+void Turquoise::print(std::ostream &out) const {
+    out << string("T");
 }
 
 int Ruby::getCardsPerCoin(int coins) {
@@ -121,8 +121,8 @@ string Ruby::getName() {
     return "Ruby";
 }
 
-void Ruby::print(std::ostream &out) {
-    out << "R";
+void Ruby::print(std::ostream &out) const {
+    out << string("R");
 }
 
 int Amethyst::getCardsPerCoin(int coins) {
@@ -141,8 +141,8 @@ string Amethyst::getName() {
     return "Amethyst";
 }
 
-void Amethyst::print(std::ostream &out) {
-    out << "A";
+void Amethyst::print(std::ostream &out) const {
+    out << string("A");
 }
 
 int Emerald::getCardsPerCoin(int coins) {
@@ -157,11 +157,11 @@ string Emerald::getName() {
     return "Emerald";
 }
 
-void Emerald::print(std::ostream &out) {
-    out << "E";
+void Emerald::print(std::ostream &out) const {
+    out << string("E");
 }
 
-std::ostream operator<<(std::ostream &output, Card &card) {
+std::ostream& operator<<(std::ostream &output, const Card &card) {
     card.print(output);
     return output;
 }
