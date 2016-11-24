@@ -12,7 +12,7 @@
 
 class CardFactory;
 
-class Deck : std::vector<Card> {
+class Deck : std::vector<Card*> {
 public:
     Deck(std::istream &, CardFactory *);
     Card *draw();

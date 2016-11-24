@@ -6,13 +6,13 @@
 
 Card *Deck::draw() {
     Card *card = new Ruby();
-    *card = operator[](0);
+    *card = *operator[](0);
     return card;
 }
 
 std::ostream &operator<<(std::ostream &output, const Deck &deck) {
     for (int i = 0; i < deck.size(); ++i) {
-        output << deck[i];
+        output << *deck[i];
     }
     return output;
 }
