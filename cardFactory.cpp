@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "cardFactory.h"
 
 CardFactory *CardFactory::getFactory() {
@@ -10,5 +11,8 @@ CardFactory *CardFactory::getFactory() {
 }
 
 Deck CardFactory::getDeck() {
-    return Deck(std::cin, nullptr);
+    std::ifstream fileReader;
+    fileReader.open("default.txt");
+    // Have to figure out how to shuffle while still using istream
+    return Deck(fileReader, this);
 }
