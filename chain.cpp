@@ -18,3 +18,7 @@ template <typename T>
 std::ostream &operator<<(std::ostream &output, const Chain<T> &chain) {
     return output;
 }
+
+Chain::Chain(std::istream &, CardFactory *) {
+
+}
