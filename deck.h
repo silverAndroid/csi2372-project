@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "card.h"
+#include "gemstones.h"
 #include "cardFactory.h"
 
 class CardFactory;
