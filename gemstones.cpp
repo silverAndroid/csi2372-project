@@ -2,7 +2,7 @@
 // Created by silver_android on 21/11/16.
 //
 
-#include "card.h"
+#include "gemstones.h"
 
 
 int Quartz::getCardsPerCoin(int coins) {
