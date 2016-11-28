@@ -1,7 +1,19 @@
 cmake_minimum_required(VERSION 3.6)
-project(CSI2372_Project)
+project(csi2372_project)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp gemstones.cpp gemstones.h deck.cpp deck.h cardFactory.cpp cardFactory.h chain.cpp chain.h players.cpp players.h)
-add_executable(CSI2372_Project ${SOURCE_FILES})
+set(SOURCE_FILES
+    cardFactory.cpp
+    cardFactory.h
+    chain.cpp
+    chain.h
+    deck.cpp
+    deck.h
+    gemstones.cpp
+    gemstones.h
+    main.cpp
+        player.cpp
+        player.h)
+
+add_executable(csi2372_project ${SOURCE_FILES})
