@@ -10,9 +10,7 @@
 #include "cardFactory.h"
 
 template <typename T>
-class Chain {
-private:
-    std::vector<T*> chainList;
+class Chain : std::vector<T> {
 public:
     Chain(std::istream &, CardFactory *);
     Chain<T>&operator+=(Card *);

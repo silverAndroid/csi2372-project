@@ -15,6 +15,6 @@ CardFactory *CardFactory::getFactory() {
 Deck CardFactory::getDeck() {
     std::ifstream fileReader;
     fileReader.open("default.txt");
-    // Have to figure out how to shuffle while still using istream
+    //TODO: Have to figure out how to shuffle while still using istream
     return Deck(fileReader, this);
 }

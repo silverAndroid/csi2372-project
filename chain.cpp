@@ -11,22 +11,22 @@ Chain<T> &Chain<T>::operator+=(Card *card) {
         //TODO: Need to run test to make sure it works
         throw IllegalTypeException(card->getName(), typeid(T).name());
     } else {
-        chainList.push_back(card);
+        push_back(card);
     }
     return *this;
 }
 
 template <typename T>
 int Chain<T>::sell() {
-    Card card = chainList[0];
-    return card.getCardsPerCoin((int) chainList.size());
+    Card card = operator[](0);
+    return card.getCardsPerCoin((int) size());
 }
 
 template <typename T>
 std::ostream &operator<<(std::ostream &output, const Chain<T> &chain) {
-    output << chain.chainList[0].getName() << "      ";
-    for (int i = 0; i < chain.chainList.size(); ++i) {
-        output << chain.chainList[i];
+    output << chain[0].getName() << "      ";
+    for (int i = 0; i < chain.size(); ++i) {
+        output << chain[i];
     }
     return output;
 }
