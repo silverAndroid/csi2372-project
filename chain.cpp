@@ -3,9 +3,16 @@
 //
 
 #include "chain.h"
+#include <typeinfo>
 
 template <typename T>
-Chain<T> &Chain<T>::operator+=(Card *) {
+Chain<T> &Chain<T>::operator+=(Card *card) {
+    if (T t = dynamic_cast<T>(*card) == nullptr) {
+        //TODO: Need to run test to make sure it works
+        throw IllegalTypeException(card->getName(), typeid(T).name());
+    } else {
+        chainList.push_back(card);
+    }
     return *this;
 }
 
