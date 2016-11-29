@@ -34,7 +34,7 @@ Card *Hand::operator[](int index) {
 
 std::ostream &operator<<(std::ostream &output, const Hand &hand) {
     for (int i = 0; i < hand.handVector.size(); ++i) {
-        output << *handVector[i];
+        output << *hand.handVector[i];
     }
     return output;
 }
