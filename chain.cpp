@@ -7,19 +7,20 @@
 
 template <typename T>
 Chain<T> &Chain<T>::operator+=(Card *card) {
-    if (T t = dynamic_cast<T>(*card) == nullptr) {
+    T *t;
+    if ((t = (T *) (dynamic_cast<T *>(card) == nullptr))) {
         //TODO: Need to run test to make sure it works
         throw IllegalTypeException(card->getName(), typeid(T).name());
     } else {
-        push_back(card);
+        this->push_back(t);
     }
     return *this;
 }
 
 template <typename T>
 int Chain<T>::sell() {
-    Card card = operator[](0);
-    return card.getCardsPerCoin((int) size());
+    Card card = this->operator[](0);
+    return card.getCardsPerCoin((int) this->size());
 }
 
 template <typename T>
