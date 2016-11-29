@@ -165,3 +165,12 @@ std::ostream& operator<<(std::ostream &output, const Card &card) {
     card.print(output);
     return output;
 }
+
+IllegalTypeException::IllegalTypeException(const string invalidType, const string properType) :
+        runtime_error("Invalid type"), invalid(invalidType), proper(properType) {}
+
+const char* IllegalTypeException::what() const throw() {
+    string *error = new string(runtime_error::what());
+    *error = *error + ": " + invalid + ", should be " + proper;
+    return error->c_str();
+}

@@ -3,10 +3,14 @@
 //
 
 #include <string>
+#include <exception>
+#include <stdexcept>
+
 #ifndef CSI2372_PROJECT_CARD_H
 #define CSI2372_PROJECT_CARD_H
 
 using std::string;
+using std::runtime_error;
 
 class Card {
 public:
@@ -70,6 +74,15 @@ public:
     int getCardsPerCoin(int coins);
     string getName();
     void print(std::ostream &out) const;
+};
+
+class IllegalTypeException : public std::runtime_error {
+private:
+    string invalid;
+    string proper;
+public:
+    IllegalTypeException(const string invalidType, const string properType);
+    const char *what() const throw();
 };
 
 #endif //CSI2372_PROJECT_CARD_H
