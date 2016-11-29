@@ -11,6 +11,7 @@
 class Deck;
 
 class CardFactory {
+static CardFactory *instance;
 public:
     static CardFactory* getFactory();
     Deck getDeck();

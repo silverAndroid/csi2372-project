@@ -7,7 +7,9 @@
 #include "cardFactory.h"
 
 CardFactory *CardFactory::getFactory() {
-    return nullptr;
+    if (instance == nullptr)
+        instance = new CardFactory();
+    return instance;
 }
 
 Deck CardFactory::getDeck() {
