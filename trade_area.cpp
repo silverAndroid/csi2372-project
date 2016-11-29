@@ -43,8 +43,8 @@ int TradeArea::numCards() {
 std::ostream &operator<<(std::ostream &output, const TradeArea &tradeArea) {
     std::list<Card *>::const_iterator it = tradeArea.begin();
     while (it != tradeArea.end()) {
-        Card card = **it;
-        output << card;
+        Card *card = *it;
+        output << *card;
     }
     return output;
 }
