@@ -14,6 +14,6 @@ set(SOURCE_FILES
     gemstones.h
     main.cpp
         player.cpp
-        player.h discard_pile.cpp discard_pile.h trade_area.cpp trade_area.h)
+        player.h discard_pile.cpp discard_pile.h trade_area.cpp trade_area.h hand.cpp hand.h)
 
 add_executable(csi2372_project ${SOURCE_FILES})
