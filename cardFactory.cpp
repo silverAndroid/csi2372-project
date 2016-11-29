@@ -6,6 +6,8 @@
 #include <fstream>
 #include "cardFactory.h"
 
+CardFactory *CardFactory::instance;
+
 CardFactory *CardFactory::getFactory() {
     if (instance == nullptr)
         instance = new CardFactory();
