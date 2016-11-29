@@ -9,7 +9,7 @@ template <typename T>
 Chain<T> &Chain<T>::operator+=(Card *card) {
     T *t;
     if ((t = (T *) (dynamic_cast<T *>(card) == nullptr))) {
-        //TODO: Need to run test to make sure it works
+        //TODO: Need to run test to make sure it works and uses the right types
         throw IllegalTypeException(card->getName(), typeid(T).name());
     } else {
         this->push_back(t);

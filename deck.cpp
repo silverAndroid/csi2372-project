@@ -5,8 +5,10 @@
 #include "deck.h"
 
 Card *Deck::draw() {
+    // To prevent side-effects, allocated drawn card in new location
     Card *card = new Ruby();
-    *card = *operator[](0);
+    *card = *back();
+    pop_back();
     return card;
 }
 
