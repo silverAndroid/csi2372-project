@@ -76,13 +76,9 @@ public:
     void print(std::ostream &out) const;
 };
 
-class IllegalTypeException : public std::runtime_error {
-private:
-    string invalid;
-    string proper;
+class IllegalTypeException {
 public:
     IllegalTypeException(const string invalidType, const string properType);
-    const char *what() const throw();
 };
 
 #endif //CSI2372_PROJECT_CARD_H

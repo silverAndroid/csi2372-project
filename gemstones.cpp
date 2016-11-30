@@ -2,6 +2,7 @@
 // Created by silver_android on 21/11/16.
 //
 
+#include <iostream>
 #include "gemstones.h"
 
 
@@ -166,11 +167,6 @@ std::ostream& operator<<(std::ostream &output, const Card &card) {
     return output;
 }
 
-IllegalTypeException::IllegalTypeException(const string invalidType, const string properType) :
-        runtime_error("Invalid type"), invalid(invalidType), proper(properType) {}
-
-const char* IllegalTypeException::what() const throw() {
-    string *error = new string(runtime_error::what());
-    *error = *error + ": " + invalid + ", should be " + proper;
-    return error->c_str();
+IllegalTypeException::IllegalTypeException(const string invalidType, const string properType) {
+    std::cout << "Invalid type: " << invalidType << ", should be " << properType;
 }
