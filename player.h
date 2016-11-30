@@ -9,7 +9,8 @@
 class Player {
     std::string playerName;
     int numOfCoins;
-    int maxNumOfChains = 2;
+    int numOfChains;
+    int maxNumOfChains;
 public:
     Player( std::string &);
     std::string getName();
