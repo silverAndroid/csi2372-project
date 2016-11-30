@@ -14,7 +14,8 @@ class Chain_Base {
 };
 
 template <typename T>
-class Chain : std::vector<T*>, Chain_Base {
+class Chain : Chain_Base {
+    std::vector<T*> cards;
 public:
     Chain();
     Chain(std::istream &, CardFactory *);
