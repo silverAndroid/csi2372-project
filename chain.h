@@ -9,8 +9,12 @@
 #include "gemstones.h"
 #include "cardFactory.h"
 
+class Chain_Base {
+
+};
+
 template <typename T>
-class Chain : std::vector<T*> {
+class Chain : std::vector<T*>, Chain_Base {
 public:
     Chain();
     Chain(std::istream &, CardFactory *);

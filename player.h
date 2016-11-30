@@ -5,14 +5,19 @@
 #ifndef CSI2372_PROJECT_PLAYERS_H
 #define CSI2372_PROJECT_PLAYERS_H
 #include <string>
+#include <vector>
+#include "CardFactory.h"
+#include "chain.h"
 
 class Player {
+    std::vector<Chain_Base> chains;
     std::string playerName;
     int numOfCoins;
     int numOfChains;
     int maxNumOfChains;
 public:
     Player( std::string &);
+    Player(std::istream&, CardFactory*);
     std::string getName();
     int getNumCoins();
     Player& operator+=(int);
