@@ -11,11 +11,13 @@
 #include "cardFactory.h"
 
 class DiscardPile : std::vector<Card*> {
+public:
     DiscardPile&operator+=(Card *);
     Card *pickUp();
     Card *top();
     void print(std::ostream &);
     friend std::ostream& operator<<(std::ostream &, const DiscardPile &);
+    DiscardPile();
     DiscardPile(std::istream &, CardFactory *);
 };
 

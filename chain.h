@@ -12,6 +12,7 @@
 template <typename T>
 class Chain : std::vector<T*> {
 public:
+    Chain();
     Chain(std::istream &, CardFactory *);
     Chain<T>&operator+=(Card *);
     int sell();

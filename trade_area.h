@@ -16,6 +16,7 @@ public:
     Card *trade(string);
     int numCards();
     friend std::ostream& operator<<(std::ostream &, const TradeArea &);
+    TradeArea();
     TradeArea(std::istream &, CardFactory *);
 };
 

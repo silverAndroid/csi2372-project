@@ -8,6 +8,10 @@ DiscardPile::DiscardPile(std::istream &, CardFactory *) {
 
 }
 
+DiscardPile::DiscardPile() {
+
+}
+
 DiscardPile &DiscardPile::operator+=(Card *card) {
     push_back(card); // TODO: Check if any side effects from using same memory location
     return *this;

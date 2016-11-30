@@ -14,6 +14,7 @@ class CardFactory;
 
 class Deck : std::vector<Card*> {
 public:
+    Deck();
     Deck(std::istream &, CardFactory *);
     Card *draw();
     friend std::ostream& operator<<(std::ostream &, const Deck &);

@@ -6,6 +6,16 @@
 #include <typeinfo>
 
 template <typename T>
+Chain<T>::Chain(std::istream &, CardFactory *) {
+
+}
+
+template <typename T>
+Chain<T>::Chain() {
+
+}
+
+template <typename T>
 Chain<T> &Chain<T>::operator+=(Card *card) {
     T *t;
     if ((t = (T *) (dynamic_cast<T *>(card) == nullptr))) {
@@ -19,8 +29,8 @@ Chain<T> &Chain<T>::operator+=(Card *card) {
 
 template <typename T>
 int Chain<T>::sell() {
-    Card card = this->operator[](0);
-    return card.getCardsPerCoin((int) this->size());
+    Card *card = this->operator[](0);
+    return card->getCardsPerCoin((int) this->size());
 }
 
 template <typename T>
@@ -30,9 +40,4 @@ std::ostream &operator<<(std::ostream &output, const Chain<T> &chain) {
         output << chain[i];
     }
     return output;
-}
-
-template <typename T>
-Chain<T>::Chain(std::istream &, CardFactory *) {
-
 }

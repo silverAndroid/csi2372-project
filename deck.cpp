@@ -22,3 +22,7 @@ std::ostream &operator<<(std::ostream &output, const Deck &deck) {
 Deck::Deck(std::istream &, CardFactory *) {
 
 }
+
+Deck::Deck() {
+
+}
