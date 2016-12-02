@@ -23,10 +23,7 @@ int main() {
         //load players from last game
     }else{
         gameTable = new Table(player1Name, player2Name, factory);
-
     }
-
-
 
     return 0;
 }

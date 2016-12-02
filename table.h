@@ -16,14 +16,14 @@
 class Table {
     Player* player1;
     Player* player2;
-    TradeArea* tradeArea;
-    Deck* deck;
+    TradeArea tradeArea;
+    Deck deck;
+    CardFactory* factory;
 public:
     Table(string player1Name, string player2Name, CardFactory* factory);
     Table( std::istream&, CardFactory* );
     bool win( std::string& );
     void print(std::ostream&);
-    std::ostream& operator<<(std::ostream &, const Table &);
 };
 
 

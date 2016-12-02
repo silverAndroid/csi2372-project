@@ -19,12 +19,13 @@ class Player {
     int numOfCoins;
     int numOfChains;
     int maxNumOfChains;
-    //Hand hand;
+    Hand hand;
 public:
     Player( std::string &);
     Player(std::istream&, CardFactory*);
     std::string getName();
     int getNumCoins();
+    void addCardToHand(Card*);
     Player& operator+=(int);
     int getMaxNumChains();
     int getNumChains();

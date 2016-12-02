@@ -4,11 +4,18 @@
 
 #include "table.h"
 
-Table::Table(string player1Name, string player2Name, CardFactory *factory) {
+Table::Table(string player1Name, string player2Name, CardFactory *cardFactory) {
     player1 = new Player(player1Name);
     player2 = new Player(player2Name);
-    tradeArea = new TradeArea();
-    deck = new Deck();
+    factory = cardFactory;
+
+    deck = factory->getDeck();
+
+    for(int i=0; i<5; ++i){
+        player1->addCardToHand(deck.draw());
+        player2->addCardToHand(deck.draw());
+    }
+
 }
 
 /* constructor which accepts an std::istream and reconstruct the Table from file */

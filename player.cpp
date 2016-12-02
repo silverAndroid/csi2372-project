@@ -23,6 +23,10 @@ std::string Player::getName() {
     return playerName;
 }
 
+void Player::addCardToHand(Card *card) {
+    hand += card;
+}
+
 // get the number of coins currently held by the player
 int Player::getNumCoins() {
     return numOfCoins;
