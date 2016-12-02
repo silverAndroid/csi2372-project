@@ -36,3 +36,27 @@ int Player::getMaxNumChains() {
 int Player::getNumChains() {
     return numOfChains;
 }
+
+void Player::buyThirdChain(){
+    if(numOfCoins < 2) {
+        //throw exception
+    }else if(maxNumOfChains == 3){
+        std::cout << "Already have 3 chains. Can't buy another." << std::endl;
+        return;
+    }
+    numOfCoins -= 2;
+    maxNumOfChains++;
+    chains[2] = Chain_Base();
+}
+
+Chain_Base& Player::operator[](int i) {
+    return chains[i];
+}
+
+//void Player::printHand(std::ostream &output, bool b) {
+//    if(b){
+//        //output << hand.top();
+//    }else{
+//        output << hand;
+//    }
+//}
