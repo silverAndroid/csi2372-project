@@ -25,6 +25,9 @@ int main() {
         player2 = new Player(player2Name);
     }
 
+    //init deck
+    //fill deck
+    //draw 5 cards for each hand of each player
 
     return 0;
 }
