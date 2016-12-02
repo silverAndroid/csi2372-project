@@ -13,6 +13,7 @@
 class Hand {
     std::vector<Card *> handVector;
 public:
+    Hand();
     Hand &operator+=(Card *);
     Card *play();
     Card *top();
