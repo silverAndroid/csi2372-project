@@ -20,22 +20,9 @@ public:
     friend std::ostream &operator<<(std::ostream &, const Hand &);
     Hand();
     Hand(std::istream &, CardFactory *);
-    template<typename T>
-    struct custom_vector : std::vector<T> {
-        using base = std::vector<T> ;
-        using base::vector;
-        using typename base::value_type ;
-        using base::empty ;
-        using base::size ;
-        using base::front ;
-        using base::back ;
-        using base::push_back ;
-        void pop_front() {
-            this->erase(this->begin());
-        }
-    };
 private:
-    std::queue<Card *, custom_vector<Card *>> handQueue;
+    std::queue<Card *> handQueue;
+    std::vector<Card *> handVector;
 };
 
 #endif //CSI2372_PROJECT_HAND_H
