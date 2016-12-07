@@ -14,6 +14,10 @@ Deck* Table::getDeck() {
     return deck;
 }
 
+TradeArea* Table::getTradeArea() {
+    return tradeArea;
+}
+
 /* constructor which accepts an std::istream and reconstruct the Table from file */
 //Table::Table(std::istream &, CardFactory *) {
 //
