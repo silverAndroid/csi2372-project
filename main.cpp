@@ -8,21 +8,31 @@ int main() {
 
     bool loadLastGame = false;
 
+    std::string player1Name = "Brandon";
+    std::string player2Name = "Rushil";
+
     Table* gameTable;
-    Deck* gameDeck;
+    Deck gameDeck;
     CardFactory* factory = CardFactory::getFactory();
+    Player* player1;
+    Player* player2;
 
     if(loadLastGame){
-        //Table *table = new Table(is, factory);
+        //Table *gameTable = new Table(is, factory);
     }else{
         std::cout << "Creating new table" << std::endl;
-        Table *table = new Table("Brandon", "Rushil", factory);
+
+        player1 = new Player(player1Name);
+        player2 = new Player(player2Name);
+
+        gameDeck = factory->getDeck();
+
+        Table *gameTable = new Table(player1, player2, &gameDeck);
+
     }
 
-    gameDeck = (*gameTable).getDeck();
-
-    while(!(*gameDeck).isEmpty()){
-
+    while(!gameDeck.isEmpty()){
+        
     }
 
 

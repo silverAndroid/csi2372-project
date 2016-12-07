@@ -4,24 +4,14 @@
 
 #include "table.h"
 
-Table::Table(string player1Name, string player2Name, CardFactory *cardFactory) {
-    player1 = new Player(player1Name);
-    player2 = new Player(player2Name);
-    factory = cardFactory;
-
-    deck = factory->getDeck();
-
-    std::cout << "Deck: " << deck << std::endl;
-
-    for(int i=0; i<5; ++i){
-        player1->addCardToHand(deck.draw());
-        player2->addCardToHand(deck.draw());
-    }
-
+Table::Table(Player *player1, Player *player2, Deck *deck) {
+    this->player1 = player1;
+    this->player2 = player2;
+    this->deck = deck;
 }
 
 Deck* Table::getDeck() {
-    return &deck;
+    return deck;
 }
 
 /* constructor which accepts an std::istream and reconstruct the Table from file */
