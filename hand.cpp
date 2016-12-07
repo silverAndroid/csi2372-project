@@ -8,33 +8,56 @@ Hand::Hand(std::istream &, CardFactory *) {
 
 }
 
+Hand::Hand() {
+
+}
+
 Hand &Hand::operator+=(Card *card) {
-    handVector.push_back(card);
+    handQueue.push(card);
     return *this;
 }
 
 Card *Hand::play() {
     Card *card = new Ruby();
     *card = *top();
-    handVector.pop_back();
+    handQueue.pop();
     return card;
 }
 
 Card *Hand::top() {
-    Card *card = operator[](0);
+    Card *card = handQueue.front();
     return card;
 }
 
 Card *Hand::operator[](int index) {
-    Card *card = handVector[index];
-    handVector.erase(handVector.begin() + index);
-    handVector.shrink_to_fit(); // This releases the memory allocated by the vector, see http://www.acodersjourney.com/2016/11/6-tips-supercharge-cpp-11-vector-performance/
+    std::queue<Card *> temp;
+    Card *card;
+    for (int i = 0; i < handQueue.size(); ++i) {
+        if (i == index)
+            card = handQueue.front();
+        else
+            temp.push(handQueue.front());
+        handQueue.pop();
+    }
+    for (int i = 0; i < temp.size(); ++i) {
+        handQueue.push(temp.front());
+        temp.pop();
+    }
     return card;
 }
 
 std::ostream &operator<<(std::ostream &output, const Hand &hand) {
-    for (int i = 0; i < hand.handVector.size(); ++i) {
-        output << *hand.handVector[i];
+    // TODO: Must find better way to do this
+    std::queue<Card *> temp;
+    Hand nonConstHand = hand;
+    for (int i = 0; i < hand.handQueue.size(); ++i) {
+        Card *c = nonConstHand[i];
+        output << *c;
+        temp.push(c);
+    }
+    for (int i = 0; i < temp.size(); ++i) {
+        nonConstHand.handQueue.push(temp.front());
+        temp.pop();
     }
     return output;
 }
