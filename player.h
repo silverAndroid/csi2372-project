@@ -6,7 +6,7 @@
 #define CSI2372_PROJECT_PLAYERS_H
 #include <string>
 #include <vector>
-#include "CardFactory.h"
+#include "cardFactory.h"
 #include "chain.h"
 
 class Player {
