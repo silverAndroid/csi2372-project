@@ -35,13 +35,13 @@ Card *Hand::operator[](int index) {
     Card *card = handVector[index];
     handVector.erase(handVector.begin() + index);
     handVector.shrink_to_fit(); // This releases the memory allocated by the vector, see http://www.acodersjourney.com/2016/11/6-tips-supercharge-cpp-11-vector-performance/
-    handQueue = std::queue(std::deque(handVector.begin(), handVector.end()));
+    handQueue = std::queue<Card *>(std::deque<Card *>(handVector.begin(), handVector.end()));
     return card;
 }
 
 std::ostream &operator<<(std::ostream &output, const Hand &hand) {
-    for (int i = 0; i < handVector.size(); ++i) {
-        output << *handVector[i];
+    for (int i = 0; i < hand.handVector.size(); ++i) {
+        output << *hand.handVector[i];
     }
     return output;
 }
