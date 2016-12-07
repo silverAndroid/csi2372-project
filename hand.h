@@ -13,7 +13,6 @@
 
 class Hand {
 public:
-    Hand();
     Hand &operator+=(Card *);
     Card *play();
     Card *top();
