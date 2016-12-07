@@ -13,13 +13,13 @@ TradeArea::TradeArea() {
 }
 
 TradeArea &TradeArea::operator+=(Card *card) {
-    push_back(card); // TODO: Check for any side-effects from using same memory location
+    tradeList.push_back(card); // TODO: Check for any side-effects from using same memory location
     return *this;
 }
 
 bool TradeArea::legal(Card *card) {
-    std::list<Card *>::const_iterator it = begin();
-    while (it != end()) {
+    std::list<Card *>::const_iterator it = tradeList.begin();
+    while (it != tradeList.end()) {
         Card *card1 = *it;
         if (card->getName() == card1->getName()) {
             return true;
@@ -29,11 +29,11 @@ bool TradeArea::legal(Card *card) {
 }
 
 Card *TradeArea::trade(string cardName) {
-    std::list<Card *>::const_iterator it = begin();
-    while (it != end()) {
+    std::list<Card *>::const_iterator it = tradeList.begin();
+    while (it != tradeList.end()) {
         Card *card = *it; // TODO: Check if any side effects from using same memory location
         if (cardName == card->getName()) {
-            remove(card);
+            tradeList.remove(card);
             return card;
         }
     }
@@ -41,12 +41,12 @@ Card *TradeArea::trade(string cardName) {
 }
 
 int TradeArea::numCards() {
-    return (int) size();
+    return (int) tradeList.size();
 }
 
 std::ostream &operator<<(std::ostream &output, const TradeArea &tradeArea) {
-    std::list<Card *>::const_iterator it = tradeArea.begin();
-    while (it != tradeArea.end()) {
+    std::list<Card *>::const_iterator it = tradeArea.tradeList.begin();
+    while (it != tradeArea.tradeList.end()) {
         Card *card = *it;
         output << *card;
     }

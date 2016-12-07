@@ -9,7 +9,8 @@
 #include "gemstones.h"
 #include "cardFactory.h"
 
-class TradeArea : std::list<Card*> {
+class TradeArea {
+    std::list<Card *> tradeList;
 public:
     TradeArea& operator+=(Card *);
     bool legal(Card *);

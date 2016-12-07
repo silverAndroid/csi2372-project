@@ -10,7 +10,8 @@
 #include "gemstones.h"
 #include "cardFactory.h"
 
-class DiscardPile : std::vector<Card*> {
+class DiscardPile {
+    std::vector<Card *> discardVector;
 public:
     DiscardPile&operator+=(Card *);
     Card *pickUp();
