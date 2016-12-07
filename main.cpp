@@ -27,12 +27,18 @@ int main() {
 
         gameDeck = factory->getDeck();
 
+        //handing starting cards to players
+        for(int i=0; i<5; i++){
+            player1->addCardToHand(gameDeck.draw());
+            player2->addCardToHand(gameDeck.draw());
+        }
+
         Table *gameTable = new Table(player1, player2, &gameDeck);
 
     }
 
     while(!gameDeck.isEmpty()){
-        
+
     }
 
 
