@@ -23,6 +23,7 @@ public:
     Table(string player1Name, string player2Name, CardFactory* factory);
     Table( std::istream&, CardFactory* );
     bool win( std::string& );
+    Deck* getDeck();
     void print(std::ostream&);
 };
 
