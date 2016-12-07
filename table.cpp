@@ -19,6 +19,20 @@ Deck* Table::getDeck() {
 //
 //}
 
+bool Table::win(std::string &winningName) {
+    if(deck->isEmpty()){
+        if(player1->getNumCoins() == player2->getNumCoins()){
+            winningName = "Both players";
+        }else if(player1->getNumCoins() > player2->getNumCoins()){
+            winningName = player1->getName();
+        }else{
+            winningName = player2->getName();
+        }
+        return true;
+    }
+    return false;
+}
+
 /* prints the complete table with all content. Intended for serialization to file. */
 void Table::print(std::ostream &) {
 

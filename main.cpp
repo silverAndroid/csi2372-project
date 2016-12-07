@@ -6,6 +6,10 @@
 
 int main() {
 
+    //////////////////
+    /// GAME SETUP ///
+    //////////////////
+
     bool loadLastGame = false;
 
     std::string player1Name = "Brandon";
@@ -37,8 +41,25 @@ int main() {
 
     }
 
+    /////////////////
+    /// GAME LOOP ///
+    /////////////////
+
     while(!gameDeck.isEmpty()){
 
+
+        
+
+
+    }
+
+    /////////////////
+    /// GAME OVER ///
+    /////////////////
+
+    string winningName;
+    if(gameTable->win(winningName)){
+        std::cout << winningName << " has won!" << std::endl;
     }
 
 
