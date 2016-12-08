@@ -11,13 +11,14 @@
 #include "cardFactory.h"
 
 class Chain_Base {
+public:
 	virtual string getCardType() {
 		return "Chain_Base"; // Can't make pure virtual or class will become abstract and defeat the purpose of this base class
 	}
 };
 
 template <typename T>
-class Chain : Chain_Base {
+class Chain : public Chain_Base {
     std::vector<T*> cards;
 public:
     Chain(std::istream &, CardFactory *) {
@@ -40,7 +41,13 @@ public:
     }
 
     string getCardType() {
-        return typeid(T).name();
+		string className = typeid(T).name();
+		const string remove = "class ";
+		size_t start = className.find(remove);
+		if (start == std::string::npos)
+			return className;
+		className.replace(start, remove.length(), "");
+        return className;
     }
 
     int sell() {
