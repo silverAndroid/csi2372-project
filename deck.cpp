@@ -26,3 +26,7 @@ Deck::Deck(std::istream &, CardFactory *) {
 Deck::Deck() {
 
 }
+
+Deck::Deck(std::vector<Card *> cards) : vector(cards) {
+
+}

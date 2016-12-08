@@ -12,9 +12,10 @@
 
 class CardFactory;
 
-class Deck : std::vector<Card*> {
+class Deck :  public std::vector<Card*> {
 public:
     Deck();
+    Deck(std::vector<Card *>);
     Deck(std::istream &, CardFactory *);
     Card *draw();
     friend std::ostream& operator<<(std::ostream &, const Deck &);
