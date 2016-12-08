@@ -14,8 +14,7 @@ DiscardPile &DiscardPile::operator+=(Card *card) {
 }
 
 Card *DiscardPile::pickUp() {
-    Card *top = new Ruby();
-    *top = *this->top();
+    Card *top = this->top();
     discardVector.pop_back();
     return top;
 }

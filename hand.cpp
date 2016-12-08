@@ -11,8 +11,7 @@ Hand &Hand::operator+=(Card *card) {
 }
 
 Card *Hand::play() {
-    Card *card = new Ruby();
-    *card = *top();
+    Card *card = top();
     handQueue.pop();
     handVector.pop_back();
     return card;
