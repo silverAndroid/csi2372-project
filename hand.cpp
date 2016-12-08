@@ -4,10 +4,6 @@
 
 #include "hand.h"
 
-Hand::Hand() {
-
-}
-
 Hand &Hand::operator+=(Card *card) {
     handQueue.push(card);
     handVector.push_back(card);
@@ -15,8 +11,7 @@ Hand &Hand::operator+=(Card *card) {
 }
 
 Card *Hand::play() {
-    Card *card = new Ruby();
-    *card = *top();
+    Card *card = top();
     handQueue.pop();
     handVector.pop_back();
     return card;
