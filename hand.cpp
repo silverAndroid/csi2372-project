@@ -4,10 +4,6 @@
 
 #include "hand.h"
 
-Hand::Hand() {
-
-}
-
 Hand &Hand::operator+=(Card *card) {
     handQueue.push(card);
     handVector.push_back(card);
