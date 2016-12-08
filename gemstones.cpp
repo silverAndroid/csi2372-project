@@ -167,6 +167,40 @@ std::ostream& operator<<(std::ostream &output, const Card &card) {
     return output;
 }
 
+std::istream &operator>>(std::istream &input, Card *&card) {
+    char name;
+    input >> name;
+    switch (name) {
+        case 'Q':
+            card = new Quartz();
+            break;
+        case 'H':
+            card = new Hematite();
+            break;
+        case 'O':
+            card = new Obsidian();
+            break;
+        case 'M':
+            card = new Malachite();
+            break;
+        case 'T':
+            card = new Turquoise();
+            break;
+        case 'R':
+            card = new Ruby();
+            break;
+        case 'A':
+            card = new Amethyst();
+            break;
+        case 'E':
+            card = new Emerald();
+            break;
+        default:
+            break;
+    }
+    return input;
+}
+
 IllegalTypeException::IllegalTypeException(const string invalidType, const string properType) {
     std::cout << "Invalid type: " << invalidType << ", should be " << properType;
 }

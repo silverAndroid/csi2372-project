@@ -5,7 +5,6 @@
 #ifndef CSI2372_PROJECT_HAND_H
 #define CSI2372_PROJECT_HAND_H
 
-
 #include <vector>
 #include <queue>
 #include "gemstones.h"

@@ -18,6 +18,7 @@ public:
     virtual string getName() = 0;
     virtual void print(std::ostream &out) const = 0;
     friend std::ostream& operator<<(std::ostream &, const Card &);
+    friend std::istream& operator>>(std::istream &, Card *&);
 };
 
 class Quartz : public Card {
