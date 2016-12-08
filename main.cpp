@@ -43,7 +43,7 @@ int main() {
 
         gameTradeArea = new TradeArea();
 
-        Table *gameTable = new Table(player1, player2, &gameDeck, gameTradeArea);
+        gameTable = new Table(player1, player2, &gameDeck, gameTradeArea);
 
     }
 
