@@ -9,8 +9,8 @@ Player::Player( std::string& name ){
     maxNumOfChains = 2;
     numOfChains = 0;
     playerName = name;
-    chains[0] = Chain_Base();
-    chains[1] = Chain_Base();
+    chains.push_back(Chain_Base());
+    chains.push_back(Chain_Base());
 }
 
 // constructor which accepts an std::istream and reconstruct the Player from file.
