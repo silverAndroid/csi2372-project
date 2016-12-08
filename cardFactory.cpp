@@ -9,6 +9,16 @@
 
 CardFactory *CardFactory::instance;
 
+CardFactory::CardFactory() {
+	std::ifstream fileReader("../default.txt");
+	if (!fileReader.good())
+		fileReader = std::ifstream("default.txt");
+	Card *card = new Ruby();
+	while (fileReader >> card) {
+		cards.push_back(card);
+	}
+}
+
 CardFactory *CardFactory::getFactory() {
     if (instance == nullptr)
         instance = new CardFactory();
@@ -16,15 +26,6 @@ CardFactory *CardFactory::getFactory() {
 }
 
 Deck CardFactory::getDeck() {
-    std::vector<Card *> cards;
-    std::ifstream fileReader("../default.txt");
-    if (!fileReader.good())
-        fileReader = std::ifstream("default.txt");
-    Card *card = new Ruby();
-    while (fileReader >> card) {
-        cards.push_back(card);
-    }
-
     std::shuffle(cards.begin(), cards.end(), engine);
     return Deck(cards);
 }

@@ -15,6 +15,8 @@ class CardFactory {
     static CardFactory *instance;
     std::random_device rd;
     std::default_random_engine engine = std::default_random_engine(rd());
+	std::vector<Card *> cards;
+	CardFactory();
 public:
     static CardFactory *getFactory();
     Deck getDeck();
