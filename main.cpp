@@ -23,7 +23,8 @@ int main() {
     CardFactory* factory = CardFactory::getFactory();
     Player* player1;
     Player* player2;
-    TradeArea* gameTradeArea; // TODO: Need to initialize and add to Table
+    TradeArea* gameTradeArea;
+	DiscardPile *gameDiscardPile;
 
     if(loadLastGame){
         //Table *gameTable = new Table(is, factory);
@@ -42,8 +43,9 @@ int main() {
         }
 
         gameTradeArea = new TradeArea();
+		gameDiscardPile = new DiscardPile();
 
-        gameTable = new Table(player1, player2, &gameDeck, gameTradeArea);
+        gameTable = new Table(player1, player2, &gameDeck, gameTradeArea, gameDiscardPile);
 
     }
 
@@ -62,6 +64,7 @@ int main() {
 
             //Display Table
             //TODO: Display table
+			std::cout << *gameTable << std::endl;
 
             //If Player has 3 coins and two chains and decides to buy extra chain
             if(currentPlayer->getNumCoins() > 2 && currentPlayer->getMaxNumChains() == 2){

@@ -4,11 +4,12 @@
 
 #include "table.h"
 
-Table::Table(Player *player1, Player *player2, Deck *deck, TradeArea *trade) {
+Table::Table(Player *player1, Player *player2, Deck *deck, TradeArea *trade, DiscardPile *discard) {
     this->player1 = player1;
     this->player2 = player2;
     this->deck = deck;
     this->tradeArea = trade;
+	this->discardPile = discard;
 }
 
 Deck* Table::getDeck() {
@@ -39,6 +40,11 @@ bool Table::win(std::string &winningName) {
 }
 
 /* prints the complete table with all content. Intended for serialization to file. */
-void Table::print(std::ostream &) {
+void Table::print(std::ostream &output) const {
+	output << *player1 << *player2 << *discardPile << *tradeArea;
+}
 
+std::ostream &operator<<(std::ostream &output, const Table &table) {
+	table.print(output);
+	return output;
 }
