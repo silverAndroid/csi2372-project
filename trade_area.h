@@ -17,7 +17,7 @@ public:
     Card *trade(string);
     int numCards();
     friend std::ostream& operator<<(std::ostream &, const TradeArea &);
-    TradeArea();
+    TradeArea() = default;
     TradeArea(std::istream &, CardFactory *);
     bool isEmpty();
 };

@@ -14,7 +14,7 @@ class CardFactory;
 
 class Deck :  public std::vector<Card*> {
 public:
-    Deck();
+    Deck() = default;
     Deck(std::vector<Card *>);
     Deck(std::istream &, CardFactory *);
     Card *draw();

@@ -8,10 +8,6 @@ Hand::Hand() {
 
 }
 
-Hand::Hand(std::istream &, CardFactory *) {
-
-}
-
 Hand &Hand::operator+=(Card *card) {
     handQueue.push(card);
     handVector.push_back(card);

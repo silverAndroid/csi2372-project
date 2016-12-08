@@ -18,7 +18,7 @@ public:
     Card *top();
     void print(std::ostream &);
     friend std::ostream& operator<<(std::ostream &, const DiscardPile &);
-    DiscardPile();
+    DiscardPile() = default;
     DiscardPile(std::istream &, CardFactory *);
 };
 

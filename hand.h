@@ -17,7 +17,7 @@ public:
     Card *top();
     Card *operator[](int);
     friend std::ostream &operator<<(std::ostream &, const Hand &);
-    Hand();
+    Hand() = default;
     Hand(std::istream &, CardFactory *);
 private:
     std::queue<Card *> handQueue;
