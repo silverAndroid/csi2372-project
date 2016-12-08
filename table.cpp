@@ -4,24 +4,38 @@
 
 #include "table.h"
 
-Table::Table(string player1Name, string player2Name, CardFactory *cardFactory) {
-    player1 = new Player(player1Name);
-    player2 = new Player(player2Name);
-    factory = cardFactory;
+Table::Table(Player *player1, Player *player2, Deck *deck) {
+    this->player1 = player1;
+    this->player2 = player2;
+    this->deck = deck;
+}
 
-    deck = factory->getDeck();
+Deck* Table::getDeck() {
+    return deck;
+}
 
-    for(int i=0; i<5; ++i){
-        player1->addCardToHand(deck.draw());
-        player2->addCardToHand(deck.draw());
-    }
-
+TradeArea* Table::getTradeArea() {
+    return tradeArea;
 }
 
 /* constructor which accepts an std::istream and reconstruct the Table from file */
 //Table::Table(std::istream &, CardFactory *) {
 //
 //}
+
+bool Table::win(std::string &winningName) {
+    if(deck->isEmpty()){
+        if(player1->getNumCoins() == player2->getNumCoins()){
+            winningName = "Both players";
+        }else if(player1->getNumCoins() > player2->getNumCoins()){
+            winningName = player1->getName();
+        }else{
+            winningName = player2->getName();
+        }
+        return true;
+    }
+    return false;
+}
 
 /* prints the complete table with all content. Intended for serialization to file. */
 void Table::print(std::ostream &) {

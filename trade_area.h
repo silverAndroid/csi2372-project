@@ -19,6 +19,7 @@ public:
     friend std::ostream& operator<<(std::ostream &, const TradeArea &);
     TradeArea();
     TradeArea(std::istream &, CardFactory *);
+    bool isEmpty();
 };
 
 

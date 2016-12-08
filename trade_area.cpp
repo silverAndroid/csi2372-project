@@ -17,6 +17,10 @@ TradeArea &TradeArea::operator+=(Card *card) {
     return *this;
 }
 
+bool TradeArea::isEmpty() {
+    return tradeList.empty();
+}
+
 bool TradeArea::legal(Card *card) {
     std::list<Card *>::const_iterator it = tradeList.begin();
     while (it != tradeList.end()) {

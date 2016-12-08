@@ -19,6 +19,10 @@ std::ostream &operator<<(std::ostream &output, const Deck &deck) {
     return output;
 }
 
+bool Deck::isEmpty() {
+    return this->size() == 0;
+}
+
 Deck::Deck(std::istream &, CardFactory *) {
 
 }

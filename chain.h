@@ -20,6 +20,7 @@ public:
     Chain();
     Chain(std::istream &, CardFactory *);
     Chain<T>&operator+=(Card *);
+    T getCardType();
     int sell();
     friend std::ostream& operator<<(std::ostream &, const Chain<T> &);
 };

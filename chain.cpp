@@ -28,6 +28,11 @@ Chain<T> &Chain<T>::operator+=(Card *card) {
 }
 
 template <typename T>
+T Chain::getCardType() {
+    return typeid(T).name();
+}
+
+template <typename T>
 int Chain<T>::sell() {
     Card *card = cards[0];
     return card->getCardsPerCoin((int) cards.size());

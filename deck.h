@@ -18,6 +18,7 @@ public:
     Deck(std::vector<Card *>);
     Deck(std::istream &, CardFactory *);
     Card *draw();
+    bool isEmpty();
     friend std::ostream& operator<<(std::ostream &, const Deck &);
 };
 
