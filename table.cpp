@@ -4,10 +4,11 @@
 
 #include "table.h"
 
-Table::Table(Player *player1, Player *player2, Deck *deck) {
+Table::Table(Player *player1, Player *player2, Deck *deck, TradeArea *trade) {
     this->player1 = player1;
     this->player2 = player2;
     this->deck = deck;
+    this->tradeArea = trade;
 }
 
 Deck* Table::getDeck() {

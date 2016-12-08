@@ -8,10 +8,6 @@ TradeArea::TradeArea(std::istream &, CardFactory *) {
 
 }
 
-TradeArea::TradeArea() {
-
-}
-
 TradeArea &TradeArea::operator+=(Card *card) {
     tradeList.push_back(card); // TODO: Check for any side-effects from using same memory location
     return *this;
