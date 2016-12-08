@@ -26,8 +26,10 @@ public:
     std::string getName();
     int getNumCoins();
     void addCardToHand(Card*);
+    void createNewChain(Card *card);
     Player& operator+=(int);
     int getMaxNumChains();
+    Hand* getHand();
     int getNumChains();
     Chain_Base& operator[](int i);
     void buyThirdChain();

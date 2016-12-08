@@ -59,6 +59,7 @@ int main() {
 
         //For each Player
         for(Player* currentPlayer : {player1,player2}){
+            Hand *currentHand = currentPlayer->getHand();
 
             //Display Table
             //TODO: Display table
@@ -81,9 +82,9 @@ int main() {
             currentPlayer->addCardToHand(gameDeck.draw());
 
             //If TradeArea is not empty
-            if(!gameTradeArea->isEmpty()){
+            if(!gameTradeArea->isEmpty()) {
                 //Add gemstone cards from the TradeArea to chains or discard them.
-                for(int i=0; i<currentPlayer->getNumChains(); ++i){
+                for (int i = 0; i < currentPlayer->getNumChains(); ++i) {
                     Chain_Base tempChain = (*currentPlayer)[i];
                     auto tempType = tempChain.getCardType();
 
@@ -91,6 +92,20 @@ int main() {
             }
 
             //Play topmost card from Hand.
+            bool cardPlayed = false;
+
+            for(int i=0; i<currentPlayer->getNumChains(); ++i){
+                Chain_Base *tempChain = &((*currentPlayer)[i]);
+                auto tempType = tempChain->getCardType();
+                std::cout << tempType << std::endl;
+                std::cout << dynamic_cast<Chain<Card>*>(tempChain) << std::endl;
+            }
+
+            if(!cardPlayed){
+                if(currentPlayer->getMaxNumChains() != currentPlayer->getNumChains()){
+                    currentPlayer->createNewChain(currentHand->top());
+                }
+            }
 
             //If chain is ended, cards for chain are removed and player receives coin(s).
 

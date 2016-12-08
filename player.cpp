@@ -33,10 +33,44 @@ int Player::getNumCoins() {
     return numOfCoins;
 }
 
+void Player::createNewChain(Card *card) {
+    if(numOfChains < maxNumOfChains){
+
+        string cardType = card->getName();
+
+        Chain_Base* newChain;
+
+        if(cardType == "Quartz"){
+            newChain = new Chain<Quartz>();
+        }else if(cardType == "Hematite"){
+            newChain = new Chain<Hematite>();
+        }else if(cardType == "Obsidian"){
+            newChain = new Chain<Obsidian>();
+        }else if(cardType == "Malachite"){
+            newChain = new Chain<Malachite>();
+        }else if(cardType == "Turquoise"){
+            newChain = new Chain<Turquoise>();
+        }else if(cardType == "Ruby"){
+            newChain = new Chain<Ruby>();
+        }else if(cardType == "Amethyst"){
+            newChain = new Chain<Amethyst>();
+        }else if(cardType == "Emerald"){
+            newChain = new Chain<Emerald>();
+        }
+
+        chains.push_back(*newChain);
+
+    }
+}
+
 // add a number of coins
 Player& Player::operator+=(int x) {
     numOfCoins = numOfCoins + x;
     return *this;
+}
+
+Hand* Player::getHand() {
+    return &hand;
 }
 
 // returns either 2 or 3.
