@@ -18,13 +18,11 @@ CardFactory *CardFactory::getFactory() {
 Deck CardFactory::getDeck() {
     std::vector<Card *> cards;
     std::ifstream fileReader("../default.txt");
-    //TODO: Have to figure out how to shuffle while still using istream
     Card *card = new Ruby();
     while (fileReader >> card) {
         cards.push_back(card);
     }
 
     std::shuffle(cards.begin(), cards.end(), engine);
-
     return Deck(cards);
 }
