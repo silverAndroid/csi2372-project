@@ -5,11 +5,10 @@
 #include "player.h"
 
 // constructor that creates a Player with a given name
-Player::Player( std::string& name ){
+Player::Player(const std::string& name ): playerName(name) {
     maxNumOfChains = 2;
     numOfChains = 0;
     numOfCoins = 0;
-    playerName = name;
     chains.push_back(Chain_Base());
     chains.push_back(Chain_Base());
 }
@@ -20,7 +19,7 @@ Player::Player(std::istream&, CardFactory*) {
 }
 
 // get the name of the player
-std::string Player::getName() {
+std::string Player::getName() const {
     return playerName;
 }
 
@@ -29,7 +28,7 @@ void Player::addCardToHand(Card *card) {
 }
 
 // get the number of coins currently held by the player
-int Player::getNumCoins() {
+int Player::getNumCoins() const {
     return numOfCoins;
 }
 
@@ -71,10 +70,19 @@ Chain_Base& Player::operator[](int i) {
 
 /* prints the top card of the player's hand (with
 argument false) or all of the player's hand (with argument true) to the supplied std::ostream */
-//void Player::printHand(std::ostream &output, bool b) {
-//    if(b){
-//        //output << hand.top();
-//    }else{
-//        output << hand;
-//    }
-//}
+void Player::printHand(std::ostream &output, bool b) {
+    if(b){
+        output << *hand.top();
+    }else{
+        output << hand;
+    }
+}
+
+std::ostream &operator<<(std::ostream &output, Player &player) {
+	output << player.getName() << "\t" << player.getNumCoins() << " coins" << std::endl;
+	for (size_t i = 0; i < player.chains.size(); i++)
+	{
+		//output << player.chains[i] << std::endl;
+	}
+	return output;
+}

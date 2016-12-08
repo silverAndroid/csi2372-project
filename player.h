@@ -15,16 +15,16 @@
 
 class Player {
     std::vector<Chain_Base> chains;
-    std::string playerName;
+    std::string const playerName;
     int numOfCoins;
     int numOfChains;
     int maxNumOfChains;
     Hand hand;
 public:
-    Player( std::string &);
+    Player(const std::string &);
     Player(std::istream&, CardFactory*);
-    std::string getName();
-    int getNumCoins();
+    std::string getName() const;
+    int getNumCoins() const;
     void addCardToHand(Card*);
     Player& operator+=(int);
     int getMaxNumChains();
@@ -32,6 +32,7 @@ public:
     Chain_Base& operator[](int i);
     void buyThirdChain();
     void printHand(std::ostream&, bool);
+	friend std::ostream &operator<<(std::ostream &, Player &);
 };
 
 
