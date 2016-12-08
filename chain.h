@@ -11,7 +11,9 @@
 #include "cardFactory.h"
 
 class Chain_Base {
-
+	virtual string getCardType() {
+		return "Chain_Base"; // Can't make pure virtual or class will become abstract and defeat the purpose of this base class
+	}
 };
 
 template <typename T>
@@ -37,7 +39,7 @@ public:
         return *this;
     }
 
-    T getCardType() {
+    string getCardType() {
         return typeid(T).name();
     }
 
