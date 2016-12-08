@@ -41,9 +41,9 @@ int main() {
             player2->addCardToHand(gameDeck.draw());
         }
 
-        Table *gameTable = new Table(player1, player2, &gameDeck);
+        gameTradeArea = new TradeArea();
 
-        gameTradeArea = gameTable->getTradeArea();
+        Table *gameTable = new Table(player1, player2, &gameDeck, gameTradeArea);
 
     }
 
@@ -85,7 +85,10 @@ int main() {
                 //Add gemstone cards from the TradeArea to chains or discard them.
                 for(int i=0; i<currentPlayer->getNumChains(); ++i){
                     Chain_Base tempChain = (*currentPlayer)[i];
-                    //auto tempType = tempChain
+                    auto tempType = tempChain.getCardType();
+
+
+
                 }
             }
 

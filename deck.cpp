@@ -6,8 +6,8 @@
 
 Card *Deck::draw() {
     // To prevent side-effects, allocated drawn card in new location
-    Card *card = new Ruby();
-    *card = *back();
+    Card *card = new Emerald();
+    card = back();
     pop_back();
     return card;
 }

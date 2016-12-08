@@ -19,7 +19,7 @@ class Table {
     TradeArea* tradeArea;
     Deck* deck;
 public:
-    Table(Player*, Player*, Deck*);
+    Table(Player*, Player*, Deck*, TradeArea*);
     Table( std::istream&, CardFactory* );
     bool win( std::string& );
     Deck* getDeck();
