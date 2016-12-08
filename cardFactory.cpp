@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include "cardFactory.h"
 
 CardFactory *CardFactory::instance;
@@ -15,8 +16,15 @@ CardFactory *CardFactory::getFactory() {
 }
 
 Deck CardFactory::getDeck() {
-    std::ifstream fileReader;
-    fileReader.open("default.txt");
+    std::vector<Card *> cards;
+    std::ifstream fileReader("../default.txt");
     //TODO: Have to figure out how to shuffle while still using istream
-    return Deck(fileReader, this);
+    Card *card = new Ruby();
+    while (fileReader >> card) {
+        cards.push_back(card);
+    }
+
+    std::shuffle(cards.begin(), cards.end(), engine);
+
+    return Deck(cards);
 }
