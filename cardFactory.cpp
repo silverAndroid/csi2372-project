@@ -18,6 +18,8 @@ CardFactory *CardFactory::getFactory() {
 Deck CardFactory::getDeck() {
     std::vector<Card *> cards;
     std::ifstream fileReader("../default.txt");
+    if (!fileReader.good())
+        fileReader = std::ifstream("default.txt");
     Card *card = new Ruby();
     while (fileReader >> card) {
         cards.push_back(card);
