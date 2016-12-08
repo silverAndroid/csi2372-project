@@ -8,6 +8,7 @@
 Player::Player( std::string& name ){
     maxNumOfChains = 2;
     numOfChains = 0;
+    numOfCoins = 0;
     playerName = name;
     chains.push_back(Chain_Base());
     chains.push_back(Chain_Base());
@@ -60,7 +61,7 @@ void Player::buyThirdChain(){
     }
     numOfCoins -= 2;
     maxNumOfChains++;
-    chains[2] = Chain_Base();
+    chains.push_back(Chain_Base());
 }
 
 // returns the chain at position i.
