@@ -31,6 +31,7 @@ void DiscardPile::print(std::ostream &output) {
 }
 
 std::ostream &operator<<(std::ostream &output, const DiscardPile &discardPile) {
-    output << *discardPile.discardVector.back();
+	if (discardPile.discardVector.size() > 0)
+		output << *(discardPile.discardVector.back());
     return output;
 }
