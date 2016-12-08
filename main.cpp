@@ -23,7 +23,7 @@ int main() {
     CardFactory* factory = CardFactory::getFactory();
     Player* player1;
     Player* player2;
-    TradeArea* gameTradeArea;
+    TradeArea* gameTradeArea; // TODO: Need to initialize and add to Table
 
     if(loadLastGame){
         //Table *gameTable = new Table(is, factory);
