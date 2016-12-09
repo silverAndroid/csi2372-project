@@ -97,48 +97,62 @@ int main() {
             //Play topmost card from Hand.
             bool cardPlayed = false;
 
-            for(int i=0; i<currentPlayer->getNumChains(); ++i){
-                Chain_Base *tempChain = &((*currentPlayer)[i]);
-                auto tempType = tempChain->getCardType();
-                auto cardType = currentHand->top()->getName();
-                if(tempType == cardType){
-                    std::cout << "Found a matching chain for " << cardType << std::endl;
-                    if(cardType == "Quartz"){
-                        *dynamic_cast<Chain<Quartz>*>(tempChain) += currentHand->play();
-                    }else if(cardType == "Hematite"){
-                        *dynamic_cast<Chain<Hematite>*>(tempChain) += currentHand->play();
-                    }else if(cardType == "Obsidian"){
-                        *dynamic_cast<Chain<Obsidian>*>(tempChain) += currentHand->play();
-                    }else if(cardType == "Malachite"){
-                        *dynamic_cast<Chain<Malachite>*>(tempChain) += currentHand->play();
-                    }else if(cardType == "Turquoise"){
-                        *dynamic_cast<Chain<Turquoise>*>(tempChain) += currentHand->play();
-                    }else if(cardType == "Ruby"){
-                        *dynamic_cast<Chain<Ruby>*>(tempChain) += currentHand->play();
-                    }else if(cardType == "Amethyst"){
-                        *dynamic_cast<Chain<Amethyst>*>(tempChain) += currentHand->play();
-                    }else if(cardType == "Emerald"){
-                        *dynamic_cast<Chain<Emerald>*>(tempChain) += currentHand->play();
-                    }
-                    cardPlayed = true;
-                    break;
-                }
-            }
+            for(int k=0; k<2; ++k) {
 
-            if(!cardPlayed){
-                if(currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()){
-					int index = 0;
-					std::cout << "You have reached the maximum amount of chains allowed. Which chain would you like to remove?" << std::endl;
-					for (size_t i = 0; i < currentPlayer->getNumChains(); i++)
-					{
-						std::cout << "Chain " << (i + 1) << ":";
-						std::cout << currentPlayer->operator[](i) << std::endl;
-					}
-					std::cin >> index;
-					currentPlayer->removeChain(index - 1);
+                if (cardPlayed) {
+                    std::cout << "Would you like to play your top card? 'Y' for yes" << std::endl;
+                    std::cout << currentHand->top() << std::endl;
+                    std::cin >> response;
+                    if (response != 'Y') {
+                        break;
+                    }
                 }
-				currentPlayer->createNewChain(currentHand->play());
-			}
+
+                for (int i = 0; i < currentPlayer->getNumChains(); ++i) {
+                    Chain_Base *tempChain = &((*currentPlayer)[i]);
+                    auto tempType = tempChain->getCardType();
+                    auto cardType = currentHand->top()->getName();
+                    if (tempType == cardType) {
+                        std::cout << "Found a matching chain for " << cardType << std::endl;
+                        if (cardType == "Quartz") {
+                            *dynamic_cast<Chain<Quartz> *>(tempChain) += currentHand->play();
+                        } else if (cardType == "Hematite") {
+                            *dynamic_cast<Chain<Hematite> *>(tempChain) += currentHand->play();
+                        } else if (cardType == "Obsidian") {
+                            *dynamic_cast<Chain<Obsidian> *>(tempChain) += currentHand->play();
+                        } else if (cardType == "Malachite") {
+                            *dynamic_cast<Chain<Malachite> *>(tempChain) += currentHand->play();
+                        } else if (cardType == "Turquoise") {
+                            *dynamic_cast<Chain<Turquoise> *>(tempChain) += currentHand->play();
+                        } else if (cardType == "Ruby") {
+                            *dynamic_cast<Chain<Ruby> *>(tempChain) += currentHand->play();
+                        } else if (cardType == "Amethyst") {
+                            *dynamic_cast<Chain<Amethyst> *>(tempChain) += currentHand->play();
+                        } else if (cardType == "Emerald") {
+                            *dynamic_cast<Chain<Emerald> *>(tempChain) += currentHand->play();
+                        }
+                        cardPlayed = true;
+                        break;
+                    }
+                }
+
+                if (!cardPlayed) {
+                    if (currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()) {
+                        int index = 0;
+                        std::cout
+                                << "You have reached the maximum amount of chains allowed. Which chain would you like to remove?"
+                                << std::endl;
+                        for (size_t i = 0; i < currentPlayer->getNumChains(); i++) {
+                            std::cout << "Chain " << (i + 1) << ":";
+                            std::cout << currentPlayer->operator[](i) << std::endl;
+                        }
+                        std::cin >> index;
+                        currentPlayer->removeChain(index - 1);
+                    }
+                    currentPlayer->createNewChain(currentHand->play());
+                    cardPlayed = true;
+
+            }
 
             //If chain is ended, cards for chain are removed and player receives coin(s).
 
