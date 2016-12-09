@@ -4,6 +4,40 @@
 #include "table.h"
 #include "cardFactory.h"
 
+void displayMessage(std::string message) {
+	int length = message.size() + 18;
+	string topLine = "";
+	string middleLine = "";
+	string messageLine = "";
+	const string eightSpaces = "        ";
+	std::transform(message.begin(), message.end(), message.begin(), ::toupper);
+
+	for (size_t i = 0; i < length; i++)
+	{
+		topLine += "=";
+	}
+
+	for (size_t i = 0; i < length; i++)
+	{
+		bool isEqualSign = i == 0 || i == length - 1;
+		middleLine += isEqualSign ? "=" : " ";
+	}
+
+	messageLine += "=";
+	messageLine += eightSpaces;
+	messageLine += message;
+	messageLine += eightSpaces; 
+	messageLine += "=";
+
+	std::cout << std::endl;
+	std::cout << topLine << std::endl;
+	std::cout << middleLine << std::endl;
+	std::cout << messageLine << std::endl;
+	std::cout << middleLine << std::endl;
+	std::cout << topLine << std::endl;
+	std::cout << std::endl;
+}
+
 int main() {
 
 	//////////////////
@@ -64,6 +98,7 @@ int main() {
 
 		//For each Player
 		for (Player* currentPlayer : { player1,player2 }) {
+			displayMessage(currentPlayer->getName() + "\'s turn");
 			Hand *currentHand = currentPlayer->getHand();
 
 			//Display Table
@@ -81,7 +116,7 @@ int main() {
 					currentPlayer->buyThirdChain();
 					std::cout << "You have purchased a third chain!" << std::endl;
 				}
-
+				response = 0;
 			}
 
 			//Player draws top card from Deck
@@ -102,13 +137,15 @@ int main() {
 
 			for (int k = 0; k < 2; ++k) {
 
+				std::cout << "The top card in your hand is a " << currentHand->top()->getName() << " card" << std::endl;
 				if (cardPlayed) {
 					std::cout << "Would you like to play your top card? 'Y' for yes" << std::endl;
-					std::cout << currentHand->top()->getName() << std::endl;
 					std::cin >> response;
 					if (response != 'Y') {
+						response = 0;
 						break;
 					}
+					response = 0;
 					cardPlayed = false;
 				}
 
@@ -172,38 +209,37 @@ int main() {
 
 				//If chain is ended, cards for chain are removed and player receives coin(s).
 
-				//If player decides to
-						//Show the player's full hand and player selects an arbitrary card
-						//Discard the arbitrary card from the player's hand and place it on the discard pile.
-
-				//Draw three cards from the deck and place cards in the trade area
-				*gameTradeArea += gameDeck.draw();
-				*gameTradeArea += gameDeck.draw();
-				*gameTradeArea += gameDeck.draw();
-
-				//while top card of discard pile matches an existing card in the trade area
-				while (gameTradeArea->legal(gameDiscardPile->top())) {
-					//draw the top-most card from the discard pile and place it in the trade area
-					*gameTradeArea += gameDiscardPile->pickUp();
-				}
-
-				//for all cards in the trade area
-					//if player wants to chain the card
-						//chain the card
-						//If chain is ended
-							//cards for chain are removed and player receives coin(s).
-					//else
-						//card remains in trade area for the next player.
-				//end
-
-				//Draw two cards from Deck and add the cards to the player's hand (at the back)
-				currentPlayer->addCardToHand(gameDeck.draw());
-				currentPlayer->addCardToHand(gameDeck.draw());
-
 			}
 
-		}
+			//If player decides to
+					//Show the player's full hand and player selects an arbitrary card
+					//Discard the arbitrary card from the player's hand and place it on the discard pile.
 
+			//Draw three cards from the deck and place cards in the trade area
+			*gameTradeArea += gameDeck.draw();
+			*gameTradeArea += gameDeck.draw();
+			*gameTradeArea += gameDeck.draw();
+
+			//while top card of discard pile matches an existing card in the trade area
+			while (gameTradeArea->legal(gameDiscardPile->top())) {
+				//draw the top-most card from the discard pile and place it in the trade area
+				*gameTradeArea += gameDiscardPile->pickUp();
+			}
+
+			//for all cards in the trade area
+				//if player wants to chain the card
+					//chain the card
+					//If chain is ended
+						//cards for chain are removed and player receives coin(s).
+				//else
+					//card remains in trade area for the next player.
+			//end
+
+			//Draw two cards from Deck and add the cards to the player's hand (at the back)
+			currentPlayer->addCardToHand(gameDeck.draw());
+			currentPlayer->addCardToHand(gameDeck.draw());
+			std::cout << currentPlayer->getName() << "\'s turn has ended!" << std::endl;
+		}
 	}
 
 	/////////////////
