@@ -34,14 +34,16 @@ bool Table::win(std::string &winningName) {
         }else{
             winningName = player2->getName();
         }
-        return true;
     }
-    return false;
+    return deck->isEmpty();
 }
 
 /* prints the complete table with all content. Intended for serialization to file. */
 void Table::print(std::ostream &output) const {
-	output << *player1 << *player2 << *discardPile << *tradeArea;
+	output << "Player 1: " << *player1;
+	output << "Player 2: " << *player2;
+	output << "Discard Pile: " << *discardPile << std::endl;
+	output << "Trade Area: " << *tradeArea << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &output, const Table &table) {
