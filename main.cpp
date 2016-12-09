@@ -145,6 +145,9 @@ int main() {
                     //Discard the arbitrary card from the player's hand and place it on the discard pile.
 
             //Draw three cards from the deck and place cards in the trade area
+            *gameTradeArea += gameDeck.draw();
+            *gameTradeArea += gameDeck.draw();
+            *gameTradeArea += gameDeck.draw();
 
             //while top card of discard pile matches an existing card in the trade area
                     //draw the top-most card from the discard pile and place it in the trade area
@@ -160,6 +163,8 @@ int main() {
             //end
 
             //Draw two cards from Deck and add the cards to the player's hand (at the back)
+            currentPlayer->addCardToHand(gameDeck.draw());
+            currentPlayer->addCardToHand(gameDeck.draw());
 
         }
 
