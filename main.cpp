@@ -107,6 +107,8 @@ int main() {
             if(!cardPlayed){
                 if(currentPlayer->getMaxNumChains() != currentPlayer->getNumChains()){
                     currentPlayer->createNewChain(currentHand->play());
+                }else{
+                    //TODO: need to destroy a chain. Prompt user to see which one to remove then create new one with currentcard
                 }
             }
 
