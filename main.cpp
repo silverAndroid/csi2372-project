@@ -100,8 +100,29 @@ int main() {
             for(int i=0; i<currentPlayer->getNumChains(); ++i){
                 Chain_Base *tempChain = &((*currentPlayer)[i]);
                 auto tempType = tempChain->getCardType();
-                std::cout << tempType << std::endl;
-                std::cout << dynamic_cast<Chain<Card>*>(tempChain) << std::endl;
+                auto cardType = currentHand->top()->getName();
+                if(tempType == cardType){
+                    std::cout << "Found a matching chain for " << cardType << std::endl;
+                    if(cardType == "Quartz"){
+                        *dynamic_cast<Chain<Quartz>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Hematite"){
+                        *dynamic_cast<Chain<Hematite>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Obsidian"){
+                        *dynamic_cast<Chain<Obsidian>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Malachite"){
+                        *dynamic_cast<Chain<Malachite>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Turquoise"){
+                        *dynamic_cast<Chain<Turquoise>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Ruby"){
+                        *dynamic_cast<Chain<Ruby>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Amethyst"){
+                        *dynamic_cast<Chain<Amethyst>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Emerald"){
+                        *dynamic_cast<Chain<Emerald>*>(tempChain) += currentHand->play();
+                    }
+                    cardPlayed = true;
+                    break;
+                }
             }
 
             if(!cardPlayed){
@@ -125,10 +146,15 @@ int main() {
                     //Discard the arbitrary card from the player's hand and place it on the discard pile.
 
             //Draw three cards from the deck and place cards in the trade area
+            *gameTradeArea += gameDeck.draw();
+            *gameTradeArea += gameDeck.draw();
+            *gameTradeArea += gameDeck.draw();
 
             //while top card of discard pile matches an existing card in the trade area
-                    //draw the top-most card from the discard pile and place it in the trade area
-            //end
+            while(gameTradeArea->legal(gameDiscardPile->top())){
+                //draw the top-most card from the discard pile and place it in the trade area
+                *gameTradeArea += gameDiscardPile->pickUp();
+            }
 
             //for all cards in the trade area
                 //if player wants to chain the card
@@ -140,6 +166,8 @@ int main() {
             //end
 
             //Draw two cards from Deck and add the cards to the player's hand (at the back)
+            currentPlayer->addCardToHand(gameDeck.draw());
+            currentPlayer->addCardToHand(gameDeck.draw());
 
         }
 
