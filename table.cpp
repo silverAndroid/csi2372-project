@@ -40,8 +40,8 @@ bool Table::win(std::string &winningName) {
 
 /* prints the complete table with all content. Intended for serialization to file. */
 void Table::print(std::ostream &output) const {
-	output << "Player 1: " << *player1;
-	output << "Player 2: " << *player2;
+	output << "Player 1: " << std::endl << *player1;
+	output << "Player 2: " << std::endl << *player2;
 	output << "Discard Pile: " << *discardPile << std::endl;
 	output << "Trade Area: " << *tradeArea << std::endl;
 }
