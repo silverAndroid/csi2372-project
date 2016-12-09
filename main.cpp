@@ -65,7 +65,7 @@ int main() {
 
             //Display Table
             //TODO: Display table
-			std::cout << *gameTable << std::endl;
+			//std::cout << *gameTable << std::endl;
 
             //If Player has 3 coins and two chains and decides to buy extra chain
             if(currentPlayer->getNumCoins() > 2 && currentPlayer->getMaxNumChains() == 2){
@@ -128,7 +128,12 @@ int main() {
             if(!cardPlayed){
                 if(currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()){
 					int index = 0;
-					std::cout << "You have reached the maximum amount of chains allowed. Which chain would you like to remove?";
+					std::cout << "You have reached the maximum amount of chains allowed. Which chain would you like to remove?" << std::endl;
+					for (size_t i = 0; i < currentPlayer->getNumChains(); i++)
+					{
+						std::cout << "Chain " << (i + 1) << ":";
+						std::cout << currentPlayer->operator[](i) << std::endl;
+					}
 					std::cin >> index;
 					currentPlayer->removeChain(index);
                 }

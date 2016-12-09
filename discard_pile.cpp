@@ -20,7 +20,9 @@ Card *DiscardPile::pickUp() {
 }
 
 Card *DiscardPile::top() {
-    Card *top = discardVector.back();
+    Card *top = nullptr;
+	if (discardVector.size() > 0)
+		top = discardVector.back();
     return top;
 }
 

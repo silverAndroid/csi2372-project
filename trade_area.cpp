@@ -18,6 +18,8 @@ bool TradeArea::isEmpty() {
 }
 
 bool TradeArea::legal(Card *card) {
+	if (tradeList.size() > 0)
+		return false;
     std::list<Card *>::const_iterator it = tradeList.begin();
     while (it != tradeList.end()) {
         Card *card1 = *it;

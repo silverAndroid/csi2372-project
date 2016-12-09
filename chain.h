@@ -13,15 +13,21 @@
 
 class Chain_Base {
 public:
-	virtual string getCardType() {
-		return "Chain_Base"; // Can't make pure virtual or class will become abstract and defeat the purpose of this base class
-	}
+    virtual string getCardType() {
+        return "Chain_Base"; // Can't make pure virtual or class will become abstract and defeat the purpose of this base class
+    }
+
+    virtual void print(std::ostream &output) const {
+        output << "Chain_Base";
+    }
+
+    friend std::ostream &operator<<(std::ostream &, const Chain_Base &);
 };
 
-template <typename T>
+template<typename T>
 class Chain : public Chain_Base {
-    std::vector<T*> cards;
-	bool numBeginning = true;
+    std::vector<T *> cards;
+    bool numBeginning = true;
 public:
     Chain(std::istream &, CardFactory *) {
 
@@ -32,8 +38,8 @@ public:
     }
 
     Chain &operator+=(Card *card) {
-        T *t;
-        if ((t = (T *) (dynamic_cast<T *>(card) == nullptr))) {
+        T *t = dynamic_cast<T *>(card);
+        if (t == nullptr) {
             //TODO: Need to run test to make sure it works and uses the right types
             throw IllegalTypeException(card->getName(), typeid(T).name());
         } else {
@@ -43,39 +49,41 @@ public:
     }
 
     string getCardType() {
-		string className = typeid(T).name();
-		const string remove = "class ";
-		size_t start = className.find(remove);
-		if (start == std::string::npos)
-			return className;
-		className.replace(start, remove.length(), "");
-		std::regex regExpress("(^[\\d-]*)");
-		std::regex_replace(className, regExpress, "");
+        string className = typeid(T).name();
+        const string remove = "class ";
+        size_t start = className.find(remove);
+        if (start == std::string::npos)
+            return className;
+        className.replace(start, remove.length(), "");
+        std::regex regExpress("(^[\\d-]*)");
+        std::regex_replace(className, regExpress, "");
         return className;
     }
 
-	bool removeNumFromBeginning(char c) {
-		if (isalpha(c)) {
-			numBeginning = false;
-		}
-		return numBeginning;
-	}
+    bool removeNumFromBeginning(char c) {
+        if (isalpha(c)) {
+            numBeginning = false;
+        }
+        return numBeginning;
+    }
 
     int sell() {
         Card *card = cards[0];
         return card->getCardsPerCoin((int) cards.size());
     }
 
-    friend std::ostream &operator<<(std::ostream &, const Chain<T> &);
+	void print(std::ostream &output) const {
+		for (int i = 0; i < cards.size(); ++i) {
+			Card *card = cards[i];
+			output << card->getName();
+			output << string("\t");
+			output << *card;
+		}
+	}
 };
 
-template <typename T>
-std::ostream &operator<<(std::ostream &output, const Chain<T> &chain) {
-    output << chain.cards[0].getName();
-    output << string("\t");
-    for (int i = 0; i < chain.cards.size(); ++i) {
-        output << chain.cards[i];
-    }
+inline std::ostream &operator<<(std::ostream &output, const Chain_Base &chainBase) {
+    chainBase.print(output);
     return output;
 }
 
