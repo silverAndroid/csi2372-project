@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <typeinfo>
+#include <regex>
 #include "gemstones.h"
 #include "cardFactory.h"
 
@@ -20,6 +21,7 @@ public:
 template <typename T>
 class Chain : public Chain_Base {
     std::vector<T*> cards;
+	bool numBeginning = true;
 public:
     Chain(std::istream &, CardFactory *) {
 
@@ -47,8 +49,17 @@ public:
 		if (start == std::string::npos)
 			return className;
 		className.replace(start, remove.length(), "");
+		std::regex regExpress("(^[\\d-]*)");
+		std::regex_replace(className, regExpress, "");
         return className;
     }
+
+	bool removeNumFromBeginning(char c) {
+		if (isalpha(c)) {
+			numBeginning = false;
+		}
+		return numBeginning;
+	}
 
     int sell() {
         Card *card = cards[0];
