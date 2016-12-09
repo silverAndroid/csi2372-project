@@ -150,8 +150,10 @@ int main() {
             *gameTradeArea += gameDeck.draw();
 
             //while top card of discard pile matches an existing card in the trade area
-                    //draw the top-most card from the discard pile and place it in the trade area
-            //end
+            while(gameTradeArea->legal(gameDiscardPile->top())){
+                //draw the top-most card from the discard pile and place it in the trade area
+                *gameTradeArea += gameDiscardPile->pickUp();
+            }
 
             //for all cards in the trade area
                 //if player wants to chain the card
