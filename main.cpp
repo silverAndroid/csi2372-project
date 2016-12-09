@@ -6,55 +6,58 @@
 
 int main() {
 
-    //////////////////
-    /// GAME SETUP ///
-    //////////////////
+	//////////////////
+	/// GAME SETUP ///
+	//////////////////
 
-    bool loadLastGame = false;
+	bool loadLastGame = false;
 
-    std::string player1Name = "Brandon";
-    std::string player2Name = "Rushil";
+	std::string player1Name = "Brandon";
+	std::string player2Name = "Rushil";
 
-    //used in game loop
-    char response;
+	//used in game loop
+	char response;
 
-    Table* gameTable;
-    Deck gameDeck;
-    CardFactory* factory = CardFactory::getFactory();
-    Player* player1;
-    Player* player2;
-    TradeArea* gameTradeArea;
+	Table* gameTable;
+	Deck gameDeck;
+	CardFactory* factory = CardFactory::getFactory();
+	Player* player1;
+	Player* player2;
+	TradeArea* gameTradeArea;
 	DiscardPile *gameDiscardPile;
 
-    if(loadLastGame){
-        //Table *gameTable = new Table(is, factory);
-    }else{
-        std::cout << "Creating new table" << std::endl;
+	if (loadLastGame) {
+		//Table *gameTable = new Table(is, factory);
+	}
+	else {
+		std::cout << "Creating new table" << std::endl;
 
-        player1 = new Player(player1Name);
-        player2 = new Player(player2Name);
+		player1 = new Player(player1Name);
+		player2 = new Player(player2Name);
 
-        gameDeck = factory->getDeck();
+		gameDeck = factory->getDeck();
 
-        //handing starting cards to players
-        for(int i=0; i<5; i++){
-            player1->addCardToHand(gameDeck.draw());
-            player2->addCardToHand(gameDeck.draw());
-        }
+		//handing starting cards to players
+		for (int i = 0; i < 5; i++) {
+			player1->addCardToHand(gameDeck.draw());
+			player2->addCardToHand(gameDeck.draw());
+		}
 
-        gameTradeArea = new TradeArea();
+		gameTradeArea = new TradeArea();
 		gameDiscardPile = new DiscardPile();
 
-        gameTable = new Table(player1, player2, &gameDeck, gameTradeArea, gameDiscardPile);
+		gameTable = new Table(player1, player2, &gameDeck, gameTradeArea, gameDiscardPile);
 
-    }
+	}
 
-    /////////////////
-    /// GAME LOOP ///
-    /////////////////
+	/////////////////
+	/// GAME LOOP ///
+	/////////////////
 
-    //While there are still cards on the Deck
-	while (!gameDeck.isEmpty()) {
+	string winningName;
+
+	//While there are still cards on the Deck
+	while (!gameTable->win(winningName)) {
 
 		//if pause save game to file and exit
 		//TODO: Implement saving entire game
@@ -65,7 +68,7 @@ int main() {
 
 			//Display Table
 			//TODO: Display table
-			//std::cout << *gameTable << std::endl;
+			std::cout << *gameTable << std::endl;
 
 			//If Player has 3 coins and two chains and decides to buy extra chain
 			if (currentPlayer->getNumCoins() > 2 && currentPlayer->getMaxNumChains() == 2) {
@@ -101,11 +104,12 @@ int main() {
 
 				if (cardPlayed) {
 					std::cout << "Would you like to play your top card? 'Y' for yes" << std::endl;
-					std::cout << currentHand->top() << std::endl;
+					std::cout << currentHand->top()->getName() << std::endl;
 					std::cin >> response;
 					if (response != 'Y') {
 						break;
 					}
+					cardPlayed = false;
 				}
 
 				for (int i = 0; i < currentPlayer->getNumChains(); ++i) {
@@ -154,11 +158,11 @@ int main() {
 							std::cout << currentPlayer->operator[](i) << std::endl;
 						}
 						std::cin >> index;
-						currentPlayer->removeChain(index - 1);
+						int coinsAdded = currentPlayer->removeChain(index - 1);
+						std::cout << "Sold for " << coinsAdded << " coins" << std::endl;
 					}
 					currentPlayer->createNewChain(currentHand->play());
 					cardPlayed = true;
-
 				}
 
 				//If chain is ended, cards for chain are removed and player receives coin(s).
@@ -200,16 +204,12 @@ int main() {
 
 		}
 
-		/////////////////
-		/// GAME OVER ///
-		/////////////////
-
-		string winningName;
-		if (gameTable->win(winningName)) {
-			std::cout << winningName << " has won!" << std::endl;
-		}
-
-
-		return 0;
 	}
+
+	/////////////////
+	/// GAME OVER ///
+	/////////////////
+
+	std::cout << winningName << " has won!" << std::endl;
+	return 0;
 }
