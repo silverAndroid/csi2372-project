@@ -67,19 +67,49 @@ void Player::createNewChain(Card *card) {
 
 		if (numOfChains < chains.size())
 			chains[numOfChains++] = newChain;
-		else
+		else {
 			chains.push_back(newChain);
+			numOfChains++;
+		}
 
         std::cout << "Creating new chain of type " << newChain->getCardType() << std::endl;
 
     }
 }
 
-void Player::removeChain(int index) {
+int Player::removeChain(int index) {
+	Chain_Base *newChain = chains[index];
+	string cardType = newChain->getCardType();
+	if (cardType == "Quartz") {
+		*dynamic_cast<Chain<Quartz>*>(newChain);
+	}
+	else if (cardType == "Hematite") {
+		*dynamic_cast<Chain<Hematite>*>(newChain);
+	}
+	else if (cardType == "Obsidian") {
+		*dynamic_cast<Chain<Obsidian>*>(newChain);
+	}
+	else if (cardType == "Malachite") {
+		*dynamic_cast<Chain<Malachite>*>(newChain);
+	}
+	else if (cardType == "Turquoise") {
+		*dynamic_cast<Chain<Turquoise>*>(newChain);
+	}
+	else if (cardType == "Ruby") {
+		*dynamic_cast<Chain<Ruby>*>(newChain);
+	}
+	else if (cardType == "Amethyst") {
+		*dynamic_cast<Chain<Amethyst>*>(newChain);
+	}
+	else if (cardType == "Emerald") {
+		*dynamic_cast<Chain<Emerald>*>(newChain);
+	}
+	int coins = newChain->sell();
+	numOfCoins += coins;
 	chains.erase(chains.begin() + index);
 	chains.shrink_to_fit();
 	--numOfChains;
-	// TODO: Add sell
+	return coins;
 }
 
 // add a number of coins
@@ -136,7 +166,8 @@ std::ostream &operator<<(std::ostream &output, Player &player) {
 	output << player.getName() << "\t" << player.getNumCoins() << " coins" << std::endl;
 	for (size_t i = 0; i < player.chains.size(); i++)
 	{
-		//output << player.chains[i] << std::endl;
+		if (player.chains[i]->getCardType() != "Chain_Base")
+			output << *player.chains[i] << std::endl;
 	}
 	return output;
 }
