@@ -55,11 +55,11 @@ public:
         return card->getCardsPerCoin((int) cards.size());
     }
 
-    friend std::ostream &operator<<(std::ostream &, const Chain &);
+    friend std::ostream &operator<<(std::ostream &, const Chain<T> &);
 };
 
 template <typename T>
-std::ostream &operator<<(std::ostream &output, const Chain &chain) {
+std::ostream &operator<<(std::ostream &output, const Chain<T> &chain) {
     output << chain.cards[0].getName();
     output << string("\t");
     for (int i = 0; i < chain.cards.size(); ++i) {
