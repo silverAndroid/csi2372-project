@@ -51,6 +51,7 @@ std::ostream &operator<<(std::ostream &output, const TradeArea &tradeArea) {
     while (it != tradeArea.tradeList.end()) {
         Card *card = *it;
         output << *card;
+		it++;
     }
     return output;
 }
