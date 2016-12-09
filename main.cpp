@@ -147,11 +147,10 @@ int main() {
                             std::cout << currentPlayer->operator[](i) << std::endl;
                         }
                         std::cin >> index;
-                        currentPlayer->removeChain(index);
+                        currentPlayer->removeChain(index - 1);
                     }
                     currentPlayer->createNewChain(currentHand->play());
                     cardPlayed = true;
-                }
 
             }
 
