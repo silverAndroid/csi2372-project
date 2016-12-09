@@ -21,6 +21,10 @@ public:
         output << "Chain_Base";
     }
 
+	virtual int sell() {
+		return 0;
+	}
+
     friend std::ostream &operator<<(std::ostream &, const Chain_Base &);
 };
 
