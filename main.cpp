@@ -105,12 +105,13 @@ int main() {
             }
 
             if(!cardPlayed){
-                if(currentPlayer->getMaxNumChains() != currentPlayer->getNumChains()){
-                    currentPlayer->createNewChain(currentHand->play());
-                }else{
-                    //TODO: need to destroy a chain. Prompt user to see which one to remove then create new one with currentcard
+                if(currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()){
+					int index = 0;
+					std::cin >> index;
+					currentPlayer->removeChain(index);
                 }
-            }
+				currentPlayer->createNewChain(currentHand->play());
+			}
 
             //If chain is ended, cards for chain are removed and player receives coin(s).
 
