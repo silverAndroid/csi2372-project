@@ -128,6 +128,7 @@ int main() {
             if(!cardPlayed){
                 if(currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()){
 					int index = 0;
+					std::cout << "You have reached the maximum amount of chains allowed. Which chain would you like to remove?";
 					std::cin >> index;
 					currentPlayer->removeChain(index);
                 }
