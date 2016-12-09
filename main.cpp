@@ -100,8 +100,29 @@ int main() {
             for(int i=0; i<currentPlayer->getNumChains(); ++i){
                 Chain_Base *tempChain = &((*currentPlayer)[i]);
                 auto tempType = tempChain->getCardType();
-                std::cout << tempType << std::endl;
-                std::cout << dynamic_cast<Chain<Card>*>(tempChain) << std::endl;
+                auto cardType = currentHand->top()->getName();
+                if(tempType == cardType){
+                    std::cout << "Found a matching chain for " << cardType << std::endl;
+                    if(cardType == "Quartz"){
+                        *dynamic_cast<Chain<Quartz>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Hematite"){
+                        *dynamic_cast<Chain<Hematite>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Obsidian"){
+                        *dynamic_cast<Chain<Obsidian>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Malachite"){
+                        *dynamic_cast<Chain<Malachite>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Turquoise"){
+                        *dynamic_cast<Chain<Turquoise>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Ruby"){
+                        *dynamic_cast<Chain<Ruby>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Amethyst"){
+                        *dynamic_cast<Chain<Amethyst>*>(tempChain) += currentHand->play();
+                    }else if(cardType == "Emerald"){
+                        *dynamic_cast<Chain<Emerald>*>(tempChain) += currentHand->play();
+                    }
+                    cardPlayed = true;
+                    break;
+                }
             }
 
             if(!cardPlayed){
