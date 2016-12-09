@@ -77,10 +77,10 @@ public:
     }
 
 	void print(std::ostream &output) const {
+		Card *card = cards[0];
+		output << card->getName();
+		output << string("\t");
 		for (int i = 0; i < cards.size(); ++i) {
-			Card *card = cards[i];
-			output << card->getName();
-			output << string("\t");
 			output << *card;
 		}
 	}
