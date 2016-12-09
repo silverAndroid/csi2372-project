@@ -65,7 +65,10 @@ void Player::createNewChain(Card *card) {
             *dynamic_cast<Chain<Emerald>*>(newChain) += card;
         }
 
-        chains[numOfChains++] = newChain;
+		if (numOfChains < chains.size())
+			chains[numOfChains++] = newChain;
+		else
+			chains.push_back(newChain);
 
         std::cout << "Creating new chain of type " << newChain->getCardType() << std::endl;
 
