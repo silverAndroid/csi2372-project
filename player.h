@@ -14,7 +14,7 @@
 
 
 class Player {
-    std::vector<Chain_Base> chains;
+    std::vector<Chain_Base*> chains;
     std::string const playerName;
     int numOfCoins;
     int numOfChains;

@@ -9,8 +9,8 @@ Player::Player(const std::string& name ): playerName(name) {
     maxNumOfChains = 2;
     numOfChains = 0;
     numOfCoins = 0;
-    chains.push_back(Chain_Base());
-    chains.push_back(Chain_Base());
+    chains.push_back(new Chain_Base());
+    chains.push_back(new Chain_Base());
 }
 
 // constructor which accepts an std::istream and reconstruct the Player from file.
@@ -57,7 +57,9 @@ void Player::createNewChain(Card *card) {
             newChain = new Chain<Emerald>();
         }
 
-        chains.push_back(*newChain);
+        chains[numOfChains++] = newChain;
+
+        std::cout << "Creating new chain of type " << newChain->getCardType() << std::endl;
 
     }
 }
@@ -94,12 +96,12 @@ void Player::buyThirdChain(){
     }
     numOfCoins -= 2;
     maxNumOfChains++;
-    chains.push_back(Chain_Base());
+    chains.push_back(new Chain_Base());
 }
 
 // returns the chain at position i.
 Chain_Base& Player::operator[](int i) {
-    return chains[i];
+    return *(chains[i]);
 }
 
 /* prints the top card of the player's hand (with
