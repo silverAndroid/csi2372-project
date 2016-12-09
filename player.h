@@ -27,6 +27,7 @@ public:
     int getNumCoins() const;
     void addCardToHand(Card*);
     void createNewChain(Card *card);
+	void removeChain(int index);
     Player& operator+=(int);
     int getMaxNumChains();
     Hand* getHand();

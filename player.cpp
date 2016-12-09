@@ -72,6 +72,12 @@ void Player::createNewChain(Card *card) {
     }
 }
 
+void Player::removeChain(int index) {
+	chains.erase(chains.begin() + index);
+	chains.shrink_to_fit();
+	--numOfChains;
+}
+
 // add a number of coins
 Player& Player::operator+=(int x) {
     numOfCoins = numOfCoins + x;
