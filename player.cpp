@@ -41,20 +41,28 @@ void Player::createNewChain(Card *card) {
 
         if(cardType == "Quartz"){
             newChain = new Chain<Quartz>();
+            *dynamic_cast<Chain<Quartz>*>(newChain) += card;
         }else if(cardType == "Hematite"){
             newChain = new Chain<Hematite>();
+            *dynamic_cast<Chain<Hematite>*>(newChain) += card;
         }else if(cardType == "Obsidian"){
             newChain = new Chain<Obsidian>();
+            *dynamic_cast<Chain<Obsidian>*>(newChain) += card;
         }else if(cardType == "Malachite"){
             newChain = new Chain<Malachite>();
+            *dynamic_cast<Chain<Malachite>*>(newChain) += card;
         }else if(cardType == "Turquoise"){
             newChain = new Chain<Turquoise>();
+            *dynamic_cast<Chain<Turquoise>*>(newChain) += card;
         }else if(cardType == "Ruby"){
             newChain = new Chain<Ruby>();
+            *dynamic_cast<Chain<Ruby>*>(newChain) += card;
         }else if(cardType == "Amethyst"){
             newChain = new Chain<Amethyst>();
+            *dynamic_cast<Chain<Amethyst>*>(newChain) += card;
         }else if(cardType == "Emerald"){
             newChain = new Chain<Emerald>();
+            *dynamic_cast<Chain<Emerald>*>(newChain) += card;
         }
 
         chains[numOfChains++] = newChain;

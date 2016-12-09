@@ -106,7 +106,7 @@ int main() {
 
             if(!cardPlayed){
                 if(currentPlayer->getMaxNumChains() != currentPlayer->getNumChains()){
-                    currentPlayer->createNewChain(currentHand->top());
+                    currentPlayer->createNewChain(currentHand->play());
                 }
             }
 
