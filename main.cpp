@@ -195,7 +195,7 @@ int main() {
 							<< "You have reached the maximum amount of chains allowed. Which chain would you like to remove?"
 							<< endl;
 						for (size_t i = 0; i < currentPlayer->getNumChains(); i++) {
-							cout << "Chain " << (i + 1) << ":";
+							cout << "Chain " << (i + 1) << ": ";
 							cout << currentPlayer->operator[](i) << endl;
 						}
 						cin >> index;
@@ -218,7 +218,16 @@ int main() {
 					//Show the player's full hand and player selects an arbitrary card
 					//Discard the arbitrary card from the player's hand and place it on the discard pile.
 			cout << "Would you like to see your hand? If you do, you will have to select a card and put it in the discard pile" << endl;
+			cin >> response;
 
+			if (response == 'Y') {
+				cout << "Hand: " << *currentHand << endl;
+				int index = 0;
+				cout << "Please select a card to go into the discard pile: ";
+				cin >> index;
+				Card *discardedCard = (*currentHand)[index];
+				*gameDiscardPile += discardedCard;
+			}
 
 			//Draw three cards from the deck and place cards in the trade area
 			*gameTradeArea += gameDeck.draw();
