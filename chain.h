@@ -44,7 +44,6 @@ public:
     Chain &operator+=(Card *card) {
         T *t = dynamic_cast<T *>(card);
         if (t == nullptr) {
-            //TODO: Need to run test to make sure it works and uses the right types
             throw IllegalTypeException(card->getName(), typeid(T).name());
         } else {
             cards.push_back(t);

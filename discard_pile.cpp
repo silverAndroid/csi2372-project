@@ -9,7 +9,7 @@ DiscardPile::DiscardPile(std::istream &, CardFactory *) {
 }
 
 DiscardPile &DiscardPile::operator+=(Card *card) {
-    discardVector.push_back(card); // TODO: Check if any side effects from using same memory location
+    discardVector.push_back(card);
     return *this;
 }
 

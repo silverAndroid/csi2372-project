@@ -9,12 +9,12 @@ TradeArea::TradeArea(std::istream &, CardFactory *) {
 }
 
 TradeArea &TradeArea::operator+=(Card *card) {
-    tradeList.push_back(card); // TODO: Check for any side-effects from using same memory location
+    tradeList.push_back(card);
     return *this;
 }
 
 bool TradeArea::isEmpty() {
-    return tradeList.empty();
+    return numCards() == 0;
 }
 
 bool TradeArea::legal(Card *card) {
@@ -46,7 +46,7 @@ Card *TradeArea::trade(string cardName) {
 		return nullptr;
     std::list<Card *>::const_iterator it = tradeList.begin();
     while (it != tradeList.end()) {
-        Card *card = *it; // TODO: Check if any side effects from using same memory location
+        Card *card = *it;
         if (cardName == card->getName()) {
             tradeList.remove(card);
             return card;
