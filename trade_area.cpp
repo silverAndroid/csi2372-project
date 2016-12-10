@@ -18,7 +18,7 @@ bool TradeArea::isEmpty() {
 }
 
 bool TradeArea::legal(Card *card) {
-	if (tradeList.size() > 0)
+	if (this->isEmpty())
 		return false;
     std::list<Card *>::const_iterator it = tradeList.begin();
     while (it != tradeList.end()) {
@@ -26,11 +26,24 @@ bool TradeArea::legal(Card *card) {
         if (card->getName() == card1->getName()) {
             return true;
         }
+		++it;
     }
     return false;
 }
 
+Card *TradeArea::trade(int index) {
+	if (this->isEmpty())
+		return nullptr;
+	std::list<Card *>::const_iterator it = tradeList.begin();
+	std::advance(it, index);
+	Card *card = *it;
+	tradeList.remove(card);
+	return card;
+}
+
 Card *TradeArea::trade(string cardName) {
+	if (this->isEmpty())
+		return nullptr;
     std::list<Card *>::const_iterator it = tradeList.begin();
     while (it != tradeList.end()) {
         Card *card = *it; // TODO: Check if any side effects from using same memory location
@@ -38,6 +51,7 @@ Card *TradeArea::trade(string cardName) {
             tradeList.remove(card);
             return card;
         }
+		++it;
     }
     return nullptr;
 }

@@ -14,6 +14,7 @@ class TradeArea {
 public:
     TradeArea& operator+=(Card *);
     bool legal(Card *);
+	Card *trade(int);
     Card *trade(string);
     int numCards();
     friend std::ostream& operator<<(std::ostream &, const TradeArea &);
