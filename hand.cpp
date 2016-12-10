@@ -13,7 +13,8 @@ Hand &Hand::operator+=(Card *card) {
 Card *Hand::play() {
     Card *card = top();
     handQueue.pop();
-    handVector.pop_back();
+    handVector.erase(handVector.begin());
+	handVector.shrink_to_fit();
     return card;
 }
 
