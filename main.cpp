@@ -4,6 +4,10 @@
 #include "table.h"
 #include "cardFactory.h"
 
+using std::cout;
+using std::cin;
+using std::endl;
+
 void displayMessage(std::string message) {
 	int length = message.size() + 18;
 	string topLine = "";
@@ -29,13 +33,13 @@ void displayMessage(std::string message) {
 	messageLine += eightSpaces; 
 	messageLine += "=";
 
-	std::cout << std::endl;
-	std::cout << topLine << std::endl;
-	std::cout << middleLine << std::endl;
-	std::cout << messageLine << std::endl;
-	std::cout << middleLine << std::endl;
-	std::cout << topLine << std::endl;
-	std::cout << std::endl;
+	cout << endl;
+	cout << topLine << endl;
+	cout << middleLine << endl;
+	cout << messageLine << endl;
+	cout << middleLine << endl;
+	cout << topLine << endl;
+	cout << endl;
 }
 
 int main() {
@@ -64,7 +68,7 @@ int main() {
 		//Table *gameTable = new Table(is, factory);
 	}
 	else {
-		std::cout << "Creating new table" << std::endl;
+		cout << "Creating new table" << endl;
 
 		player1 = new Player(player1Name);
 		player2 = new Player(player2Name);
@@ -103,18 +107,18 @@ int main() {
 
 			//Display Table
 			//TODO: Display table
-			std::cout << *gameTable << std::endl;
+			cout << *gameTable << endl;
 
 			//If Player has 3 coins and two chains and decides to buy extra chain
 			if (currentPlayer->getNumCoins() > 2 && currentPlayer->getMaxNumChains() == 2) {
 				//TODO: Offer to buy chain
-				std::cout << "Would you like to buy a third chain? 'Y' for yes" << std::endl;
-				std::cin >> response;
+				cout << "Would you like to buy a third chain? 'Y' for yes" << endl;
+				cin >> response;
 
 				//Add chain to player
 				if (response == 'Y') {
 					currentPlayer->buyThirdChain();
-					std::cout << "You have purchased a third chain!" << std::endl;
+					cout << "You have purchased a third chain!" << endl;
 				}
 				response = 0;
 			}
@@ -137,10 +141,10 @@ int main() {
 
 			for (int k = 0; k < 2; ++k) {
 
-				std::cout << "The top card in your hand is a " << currentHand->top()->getName() << " card" << std::endl;
+				cout << "The top card in your hand is a " << currentHand->top()->getName() << " card" << endl;
 				if (cardPlayed) {
-					std::cout << "Would you like to play your top card? 'Y' for yes" << std::endl;
-					std::cin >> response;
+					cout << "Would you like to play your top card? 'Y' for yes" << endl;
+					cin >> response;
 					if (response != 'Y') {
 						response = 0;
 						break;
@@ -154,7 +158,7 @@ int main() {
 					auto tempType = tempChain->getCardType();
 					auto cardType = currentHand->top()->getName();
 					if (tempType == cardType) {
-						std::cout << "Found a matching chain for " << cardType << std::endl;
+						cout << "Found a matching chain for " << cardType << endl;
 						if (cardType == "Quartz") {
 							*dynamic_cast<Chain<Quartz> *>(tempChain) += currentHand->play();
 						}
@@ -187,22 +191,21 @@ int main() {
 				if (!cardPlayed) {
 					if (currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()) {
 						int index = 0;
-						std::cout
+						cout
 							<< "You have reached the maximum amount of chains allowed. Which chain would you like to remove?"
-							<< std::endl;
+							<< endl;
 						for (size_t i = 0; i < currentPlayer->getNumChains(); i++) {
-							std::cout << "Chain " << (i + 1) << ":";
-							std::cout << currentPlayer->operator[](i) << std::endl;
+							cout << "Chain " << (i + 1) << ":";
+							cout << currentPlayer->operator[](i) << endl;
 						}
-						std::cin >> index;
+						cin >> index;
 						int coinsAdded = currentPlayer->removeChain(index - 1);
-						std::cout << "Sold for " << coinsAdded << " coins" << std::endl;
+						//If chain is ended, cards for chain are removed and player receives coin(s).
+						cout << "Sold for " << coinsAdded << " coins" << endl;
 					}
 					currentPlayer->createNewChain(currentHand->play());
 					cardPlayed = true;
 				}
-
-				//If chain is ended, cards for chain are removed and player receives coin(s).
 
 				//If player decides to
 						//Play the now topmost card from Hand.
@@ -214,6 +217,8 @@ int main() {
 			//If player decides to
 					//Show the player's full hand and player selects an arbitrary card
 					//Discard the arbitrary card from the player's hand and place it on the discard pile.
+			cout << "Would you like to see your hand? If you do, you will have to select a card and put it in the discard pile" << endl;
+
 
 			//Draw three cards from the deck and place cards in the trade area
 			*gameTradeArea += gameDeck.draw();
@@ -238,7 +243,7 @@ int main() {
 			//Draw two cards from Deck and add the cards to the player's hand (at the back)
 			currentPlayer->addCardToHand(gameDeck.draw());
 			currentPlayer->addCardToHand(gameDeck.draw());
-			std::cout << currentPlayer->getName() << "\'s turn has ended!" << std::endl;
+			cout << currentPlayer->getName() << "\'s turn has ended!" << endl;
 		}
 	}
 
@@ -246,6 +251,6 @@ int main() {
 	/// GAME OVER ///
 	/////////////////
 
-	std::cout << winningName << " has won!" << std::endl;
+	cout << winningName << " has won!" << endl;
 	return 0;
 }
