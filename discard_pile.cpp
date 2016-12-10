@@ -13,15 +13,20 @@ DiscardPile &DiscardPile::operator+=(Card *card) {
     return *this;
 }
 
+bool DiscardPile::isEmpty() {
+	return discardVector.empty();
+}
+
 Card *DiscardPile::pickUp() {
-    Card *top = this->top();
-    discardVector.pop_back();
-    return top;
+	Card *top = this->top();
+	if (top != nullptr)
+		discardVector.pop_back();
+	return top;
 }
 
 Card *DiscardPile::top() {
     Card *top = nullptr;
-	if (discardVector.size() > 0)
+	if (!this->isEmpty())
 		top = discardVector.back();
     return top;
 }

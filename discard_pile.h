@@ -14,6 +14,7 @@ class DiscardPile {
     std::vector<Card *> discardVector;
 public:
     DiscardPile&operator+=(Card *);
+	bool isEmpty();
     Card *pickUp();
     Card *top();
     void print(std::ostream &);
