@@ -192,7 +192,7 @@ int main() {
 					if (currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()) {
 						int index = 0;
 						cout
-							<< "You have reached the maximum amount of chains allowed. Which chain would you like to remove?"
+							<< "You have reached the maximum amount of chains allowed. Which chain would you like to remove? (Enter index)"
 							<< endl;
 						for (size_t i = 0; i < currentPlayer->getNumChains(); i++) {
 							cout << "Chain " << (i + 1) << ": ";
@@ -217,15 +217,15 @@ int main() {
 			//If player decides to
 					//Show the player's full hand and player selects an arbitrary card
 					//Discard the arbitrary card from the player's hand and place it on the discard pile.
-			cout << "Would you like to see your hand? If you do, you will have to select a card and put it in the discard pile" << endl;
+			cout << "Would you like to see your hand? If you do, you will have to select a card and put it in the discard pile." << endl;
 			cin >> response;
 
 			if (response == 'Y') {
 				cout << "Hand: " << *currentHand << endl;
 				int index = 0;
-				cout << "Please select a card to go into the discard pile: ";
+				cout << "Please select a card to go into the discard pile (Enter index): ";
 				cin >> index;
-				Card *discardedCard = (*currentHand)[index];
+				Card *discardedCard = (*currentHand)[index - 1];
 				*gameDiscardPile += discardedCard;
 			}
 
@@ -235,7 +235,7 @@ int main() {
 			*gameTradeArea += gameDeck.draw();
 
 			//while top card of discard pile matches an existing card in the trade area
-			while (gameTradeArea->legal(gameDiscardPile->top())) {
+			while (!gameDiscardPile->isEmpty() && gameTradeArea->legal(gameDiscardPile->top())) {
 				//draw the top-most card from the discard pile and place it in the trade area
 				*gameTradeArea += gameDiscardPile->pickUp();
 			}
@@ -248,6 +248,77 @@ int main() {
 				//else
 					//card remains in trade area for the next player.
 			//end
+
+			while (!gameTradeArea->isEmpty()) {
+				cout << "Trade Area: " << *gameTradeArea << std::endl;
+				cout << "Would you like to add a card from the trade area to a chain? 'Y' for yes" << endl;
+				cin >> response;
+				if (response != 'Y') {
+					response = 0;
+					break;
+				}
+				response = 0;
+
+				int index = 0;
+				cout << "Which card would you like to add to the chain? (Enter index)" << endl;
+				cin >> index;
+				cardPlayed = false;
+				Card *tradedCard = gameTradeArea->trade(index - 1);
+
+				for (int i = 0; i < currentPlayer->getNumChains(); ++i) {
+					Chain_Base *tempChain = &((*currentPlayer)[i]);
+					auto tempType = tempChain->getCardType();
+					auto cardType = tradedCard->getName();
+					if (tempType == cardType) {
+						cout << "Found a matching chain for " << cardType << endl;
+						if (cardType == "Quartz") {
+							*dynamic_cast<Chain<Quartz> *>(tempChain) += tradedCard;
+						}
+						else if (cardType == "Hematite") {
+							*dynamic_cast<Chain<Hematite> *>(tempChain) += tradedCard;
+						}
+						else if (cardType == "Obsidian") {
+							*dynamic_cast<Chain<Obsidian> *>(tempChain) += tradedCard;
+						}
+						else if (cardType == "Malachite") {
+							*dynamic_cast<Chain<Malachite> *>(tempChain) += tradedCard;
+						}
+						else if (cardType == "Turquoise") {
+							*dynamic_cast<Chain<Turquoise> *>(tempChain) += tradedCard;
+						}
+						else if (cardType == "Ruby") {
+							*dynamic_cast<Chain<Ruby> *>(tempChain) += tradedCard;
+						}
+						else if (cardType == "Amethyst") {
+							*dynamic_cast<Chain<Amethyst> *>(tempChain) += tradedCard;
+						}
+						else if (cardType == "Emerald") {
+							*dynamic_cast<Chain<Emerald> *>(tempChain) += tradedCard;
+						}
+						cardPlayed = true;
+						break;
+					}
+				}
+
+				if (!cardPlayed) {
+					if (currentPlayer->getMaxNumChains() == currentPlayer->getNumChains()) {
+						index = 0;
+						cout
+							<< "You have reached the maximum amount of chains allowed. Which chain would you like to remove?"
+							<< endl;
+						for (size_t i = 0; i < currentPlayer->getNumChains(); i++) {
+							cout << "Chain " << (i + 1) << ": ";
+							cout << currentPlayer->operator[](i) << endl;
+						}
+						cin >> index;
+						int coinsAdded = currentPlayer->removeChain(index - 1);
+						//If chain is ended, cards for chain are removed and player receives coin(s).
+						cout << "Sold for " << coinsAdded << " coins" << endl;
+					}
+					currentPlayer->createNewChain(tradedCard);
+					cardPlayed = true;
+				}
+			}
 
 			//Draw two cards from Deck and add the cards to the player's hand (at the back)
 			currentPlayer->addCardToHand(gameDeck.draw());
