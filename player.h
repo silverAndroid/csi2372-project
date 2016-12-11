@@ -26,13 +26,13 @@ public:
     std::string getName() const;
     int getNumCoins() const;
     void addCardToHand(Card*);
-    void createNewChain(Card *card);
-	int removeChain(int index);
+    void createNewChain(Card *);
+	Chain_Base *removeChain(int, int &);
     Player& operator+=(int);
     int getMaxNumChains();
     Hand* getHand();
     int getNumChains();
-    Chain_Base& operator[](int i);
+    Chain_Base& operator[](int);
     void buyThirdChain();
     void printHand(std::ostream&, bool);
 	friend std::ostream &operator<<(std::ostream &, Player &);

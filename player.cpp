@@ -77,7 +77,7 @@ void Player::createNewChain(Card *card) {
     }
 }
 
-int Player::removeChain(int index) {
+Chain_Base *Player::removeChain(int index, int &coins) {
 	Chain_Base *newChain = chains[index];
 	string cardType = newChain->getCardType();
 	if (cardType == "Quartz") {
@@ -104,12 +104,12 @@ int Player::removeChain(int index) {
 	else if (cardType == "Emerald") {
 		*dynamic_cast<Chain<Emerald>*>(newChain);
 	}
-	int coins = newChain->sell();
+	coins = newChain->sell();
 	numOfCoins += coins;
 	chains.erase(chains.begin() + index);
 	chains.shrink_to_fit();
 	--numOfChains;
-	return coins;
+	return newChain;
 }
 
 // add a number of coins
