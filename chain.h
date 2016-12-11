@@ -14,16 +14,20 @@
 class Chain_Base {
 public:
     virtual string getCardType() {
-        return "Chain_Base"; // Can't make pure virtual or class will become abstract and defeat the purpose of this base class
+		return "Chain_Base";
     }
 
     virtual void print(std::ostream &output) const {
-        output << "Chain_Base";
+		output << "Chain_Base";
     }
 
 	virtual int sell() {
 		return 0;
 	}
+
+    virtual std::vector<Card *> getCards() {
+        return nullptr;
+    }
 
     friend std::ostream &operator<<(std::ostream &, const Chain_Base &);
 };
@@ -83,6 +87,10 @@ public:
 			output << *card;
 		}
 	}
+
+    std::vector<Card *> getCards() {
+        return cards;
+    }
 };
 
 inline std::ostream &operator<<(std::ostream &output, const Chain_Base &chainBase) {
