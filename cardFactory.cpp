@@ -17,6 +17,7 @@ CardFactory::CardFactory() {
 	while (fileReader >> card) {
 		cards.push_back(card);
 	}
+	fileReader.close();
 }
 
 CardFactory *CardFactory::getFactory() {
