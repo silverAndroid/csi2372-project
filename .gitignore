@@ -186,3 +186,5 @@ ipch/
 
 ### VisualStudio Patch ###
 build/
+
+*.sav
