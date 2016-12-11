@@ -5,7 +5,7 @@
 #include "table.h"
 #include "cardFactory.h"
 
-Chain_Base *getChain(string cardType) ;
+void getChain(Chain_Base *tempChain, string cardType, Card *card) ;
 
 void displayMessage(std::string message) ;
 
@@ -22,7 +22,8 @@ int main() {
 	//////////////////
 
 	std::ifstream saveData("gameData.sav");
-	bool loadLastGame = saveData.good();
+	//bool loadLastGame = saveData.good();
+	bool loadLastGame = false;
 	saveData.close();
 	bool firstLoop = true;
 
@@ -44,8 +45,6 @@ int main() {
 		//Table *gameTable = new Table(is, factory);
 	}
 	else {
-		cout << "Creating new table" << endl;
-
 		player1 = new Player(player1Name);
 		player2 = new Player(player2Name);
 
@@ -136,7 +135,7 @@ int main() {
 					string tempType = tempChain->getCardType();
 					string cardType = tradedCard->getName();
 					if (tempType == cardType) {
-                        tempChain = getChain(cardType);
+                        getChain(tempChain, cardType, tradedCard);
 						cardPlayed = true;
 						break;
 					}
@@ -155,6 +154,9 @@ int main() {
 						cin >> index;
 						int coinsAdded = 0;
 						Chain_Base *removedChain = currentPlayer->removeChain(index - 1, coinsAdded);
+                        for (Card *discardedCard: removedChain->getCards()) {
+                            *gameDiscardPile += discardedCard;
+                        }
 						//If chain is ended, cards for chain are removed and player receives coin(s).
 						cout << "Sold for " << coinsAdded << " coins" << endl;
 					}
@@ -190,7 +192,7 @@ int main() {
 					string tempType = tempChain->getCardType();
 					string cardType = currentHand->top()->getName();
 					if (tempType == cardType) {
-						tempChain = getChain(cardType);
+						getChain(tempChain, cardType, currentHand->play());
 						cardPlayed = true;
 						break;
 					}
@@ -209,6 +211,9 @@ int main() {
 						cin >> index;
 						int coinsAdded = 0;
 						Chain_Base *removedChain = currentPlayer->removeChain(index - 1, coinsAdded);
+                        for (Card *discardedCard: removedChain->getCards()) {
+                            *gameDiscardPile += discardedCard;
+                        }
 						//If chain is ended, cards for chain are removed and player receives coin(s).
 						cout << "Sold for " << coinsAdded << " coins" << endl;
 					}
@@ -280,7 +285,7 @@ int main() {
 					string tempType = tempChain->getCardType();
 					string cardType = tradedCard->getName();
 					if (tempType == cardType) {
-                        tempChain = getChain(cardType);
+                        getChain(tempChain, cardType, tradedCard);
 						cardPlayed = true;
 						break;
 					}
@@ -299,6 +304,9 @@ int main() {
 						cin >> index;
 						int coinsAdded = 0;
 						Chain_Base *removedChain = currentPlayer->removeChain(index - 1, coinsAdded);
+                        for (Card *discardedCard: removedChain->getCards()) {
+                            *gameDiscardPile += discardedCard;
+                        }
 						//If chain is ended, cards for chain are removed and player receives coin(s).
 						cout << "Sold for " << coinsAdded << " coins" << endl;
 					}
@@ -322,36 +330,34 @@ int main() {
 	return 0;
 }
 
-Chain_Base *getChain(string cardType) {
-	Chain_Base *tempChain = new Chain_Base();
+void getChain(Chain_Base *tempChain, string cardType, Card *card) {
 	cout << "Found a matching chain for " << cardType << endl;
 	if (cardType == "Quartz") {
-		dynamic_cast<Chain<Quartz> *>(tempChain);
+		*dynamic_cast<Chain<Quartz> *>(tempChain) += card;
 	}
 	else if (cardType == "Hematite") {
-		dynamic_cast<Chain<Hematite> *>(tempChain);
+		*dynamic_cast<Chain<Hematite> *>(tempChain) += card;
 	}
 	else if (cardType == "Obsidian") {
-		dynamic_cast<Chain<Obsidian> *>(tempChain);
+		*dynamic_cast<Chain<Obsidian> *>(tempChain) += card;
 	}
 	else if (cardType == "Malachite") {
-		dynamic_cast<Chain<Malachite> *>(tempChain);
+		*dynamic_cast<Chain<Malachite> *>(tempChain) += card;
 	}
 	else if (cardType == "Turquoise") {
-		dynamic_cast<Chain<Turquoise> *>(tempChain);
+		*dynamic_cast<Chain<Turquoise> *>(tempChain) += card;
 	}
 	else if (cardType == "Ruby") {
-		dynamic_cast<Chain<Ruby> *>(tempChain);
+		*dynamic_cast<Chain<Ruby> *>(tempChain) += card;
 	}
 	else if (cardType == "Amethyst") {
-		dynamic_cast<Chain<Amethyst> *>(tempChain);
+		*dynamic_cast<Chain<Amethyst> *>(tempChain) += card;
 	}
 	else if (cardType == "Emerald") {
-		dynamic_cast<Chain<Emerald> *>(tempChain);
+		*dynamic_cast<Chain<Emerald> *>(tempChain) += card;
 	} else {
         throw IllegalTypeException(cardType, "Quartz, Hematite, Obsidian, Malachite, Turquoise, Ruby, Amethyst, or Emerald");
     }
-    return tempChain;
 }
 
 void displayMessage(std::string message) {
