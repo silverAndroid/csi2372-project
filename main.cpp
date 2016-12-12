@@ -1,17 +1,36 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include "player.h"
 #include "table.h"
 #include "cardFactory.h"
 
+void getChain(Chain_Base *tempChain, string cardType);
+
 void getChain(Chain_Base *tempChain, string cardType, Card *card) ;
 
-void displayMessage(std::string message) ;
+void displayMessage(std::string message);
 
 using std::cout;
 using std::cin;
-using std::endl;
+using std::endl; 
+
+void split(const std::string &s, char delim, std::vector<std::string> &elems) {
+	std::stringstream ss;
+	ss.str(s);
+	std::string item;
+	while (std::getline(ss, item, delim)) {
+		elems.push_back(item);
+	}
+}
+
+
+std::vector<std::string> split(const std::string &s, char delim) {
+	std::vector<std::string> elems;
+	split(s, delim, elems);
+	return elems;
+}
 
 int main() {
 
@@ -42,7 +61,6 @@ int main() {
 	DiscardPile *gameDiscardPile;
 
 	if (loadLastGame) {
-		//Table *gameTable = new Table(is, factory);
 	}
 	else {
 		player1 = new Player(player1Name);

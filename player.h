@@ -21,7 +21,7 @@ class Player {
     int maxNumOfChains;
     Hand hand;
 public:
-    Player(const std::string &);
+    Player(std::string);
     Player(std::istream&, CardFactory*);
     std::string getName() const;
     int getNumCoins() const;

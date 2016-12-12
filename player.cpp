@@ -5,7 +5,7 @@
 #include "player.h"
 
 // constructor that creates a Player with a given name
-Player::Player(const std::string& name ): playerName(name) {
+Player::Player(std::string name ): playerName(name) {
     maxNumOfChains = 2;
     numOfChains = 0;
     numOfCoins = 0;
@@ -163,7 +163,7 @@ void Player::printHand(std::ostream &output, bool b) {
 }
 
 std::ostream &operator<<(std::ostream &output, Player &player) {
-	output << player.getName() << "\t" << player.getNumCoins() << " coins" << std::endl;
+	output << player.getName() << " " << player.getNumCoins() << " coins" << std::endl;
 	for (size_t i = 0; i < player.chains.size(); i++)
 	{
 		if (player.chains[i]->getCardType() != "Chain_Base")

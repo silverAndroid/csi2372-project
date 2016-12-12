@@ -26,7 +26,7 @@ public:
 	}
 
     virtual std::vector<Card *> getCards() {
-        return nullptr;
+        return std::vector<Card *>();
     }
 
     friend std::ostream &operator<<(std::ostream &, const Chain_Base &);
@@ -82,14 +82,18 @@ public:
 	void print(std::ostream &output) const {
 		Card *card = cards[0];
 		output << card->getName();
-		output << string("\t");
+		output << string(" ");
 		for (int i = 0; i < cards.size(); ++i) {
 			output << *card;
 		}
 	}
 
     std::vector<Card *> getCards() {
-        return cards;
+		std::vector<Card *> cardVector;
+		for (T *t : this->cards) {
+			cardVector.push_back(dynamic_cast<Card *>(t));
+		}
+        return cardVector;
     }
 };
 

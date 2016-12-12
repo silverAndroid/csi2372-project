@@ -21,9 +21,9 @@ TradeArea* Table::getTradeArea() {
 }
 
 /* constructor which accepts an std::istream and reconstruct the Table from file */
-//Table::Table(std::istream &, CardFactory *) {
-//
-//}
+Table::Table(std::istream &, CardFactory *) {
+
+}
 
 bool Table::win(std::string &winningName) {
     if(deck->isEmpty()){

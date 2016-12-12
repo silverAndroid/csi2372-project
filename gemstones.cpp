@@ -196,6 +196,7 @@ std::istream &operator>>(std::istream &input, Card *&card) {
             card = new Emerald();
             break;
         default:
+			std::cout << name;
             break;
     }
     return input;
